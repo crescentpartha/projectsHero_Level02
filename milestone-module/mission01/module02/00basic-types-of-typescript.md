@@ -51,6 +51,10 @@
     - [`Null Types`](#null-types)
     - [`Unknown Types`](#unknown-types)
     - [`Never Types`](#never-types)
+  - [2.10 Ternary Operator, Nullish Coalescing Operator, Module Summary - ___Question\_Mark___](#210-ternary-operator-nullish-coalescing-operator-module-summary---question_mark)
+    - [`Resources`](#resources-9)
+    - [`Ternary Operator`](#ternary-operator)
+    - [`Nullish Coalescing Operator`](#nullish-coalescing-operator)
 
 # Module02: Explore Basic Types of Typescript
 
@@ -1009,6 +1013,92 @@ function throwError ( message: string): never {
 
 // throwError('Error Happened');
 throwError('Bhai Error hoyeche, please fix it!');
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 2.10 Ternary Operator, Nullish Coalescing Operator, Module Summary - ___Question_Mark___
+
+### `Resources`
+
+- [09ternary-nullish_coalescing_operator.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/09ternary-nullish_coalescing_operator.ts) | [09ternary-nullish_coalescing_operator.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/09ternary-nullish_coalescing_operator.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Ternary Operator`
+
+``` Typescript
+// Ternary Operator
+
+const age: number = 22;
+
+if (age >= 18) {
+    console.log("Yes, Adult!"); // Yes, Adult!
+}
+else {
+    console.log("No, Not Adult!");
+}
+
+const isYoung = age <= 40 ? "Young" : "Old"; // Ternary Operation
+console.log(isYoung); // Young
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Nullish Coalescing Operator`
+
+> The `nullish coalescing (??) operator` is a `logical operator` that returns its `right-hand side operand` when its left-hand side operand is `null` or `undefined`, and otherwise returns its `left-hand side operand`. <br /> <br /> `if (left-side === null || undefined)` print right-side, `otherwise` print left-side.
+
+``` Typescript
+// Nullish Coalescing Operator - Example01
+
+/* 
+The nullish coalescing (??) operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, 
+and otherwise returns its left-hand side operand.
+
+if (left-side === null || undefined) print right-side, otherwise print left-side.
+*/
+
+// const isAuthenticateUser = null;
+// const isAuthenticateUser = undefined;
+// const isAuthenticateUser = "Authenticate";
+const isAuthenticateUser = "";
+const userName = isAuthenticateUser ?? "Guest"; // Nullish Coalescing operation
+const userName2 = isAuthenticateUser ? isAuthenticateUser : 'Guest'; // Ternary Operation
+// console.log(userName); // Guest
+// console.log(userName); // Guest
+// console.log(userName); // Authenticate
+console.log({ userName }, { userName2 }); // { userName: '' } { userName2: 'Guest' }
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+``` Typescript
+// Nullish Coalescing Operator - Example02
+
+type Manush = {
+    name: string,
+    age: number,
+    address: {
+        city: "Panama",
+        road: "Country Road",
+        home?: "Sweet Home", // Optional type
+    };
+};
+
+const manush1: Manush = {
+    name: "Adom",
+    age: 100,
+    address: {
+        city: "Panama",
+        road: "Country Road",
+    },
+};
+
+// Nullish Coalescing Operator
+const home = manush1?.address?.home ?? "Sweet Home" // default "Sweet Home"
+console.log(home); // Sweet Home
+console.log({ home }); // { home: 'Sweet Home' }
 ```
 
 **[🔼Back to Top](#table-of-contents)**
