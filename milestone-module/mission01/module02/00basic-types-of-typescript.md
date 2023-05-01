@@ -46,6 +46,11 @@
     - [`Union Types`](#union-types)
     - [`Intersection Type`](#intersection-type)
     - [`Enum Type`](#enum-type)
+  - [2.9 Null, Unknown and Never Types](#29-null-unknown-and-never-types)
+    - [`Resources`](#resources-8)
+    - [`Null Types`](#null-types)
+    - [`Unknown Types`](#unknown-types)
+    - [`Never Types`](#never-types)
 
 # Module02: Explore Basic Types of Typescript
 
@@ -902,6 +907,109 @@ console.log(developer.name); // Next Level Bhai
 ```
 
 > `Notes:` If we `inherit` any type, then must `use every properties` of this type. Otherwise, it shows error.
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 2.9 Null, Unknown and Never Types
+
+### `Resources`
+
+- [08nullable-unknown-and-never_types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/08nullable-unknown-and-never_types.ts) | [08nullable-unknown-and-never_types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/08nullable-unknown-and-never_types.js)
+
+### `Null Types`
+
+``` Typescript
+/* Null Type - Example01 */
+
+// Search a name from database
+const searchName = (value: string) => {
+    if (value === null) {
+        console.log("There is nothing to search!");
+    }
+    else {
+        console.log("Searching");
+    }
+}
+
+searchName("partha"); // Searching
+// searchName(null); // Argument of type 'null' is not assignable to parameter of type 'string'
+```
+
+``` Typescript
+/* In tsconfig.json - Fix the null error */ 
+
+// But it isn't the best practice - Keep it by-default
+
+// Before
+// "strictNullChecks": true,   /* When type checking, take into account 'null' and 'undefined'. */
+
+// After
+"strictNullChecks": false,    /* When type checking, take into account 'null' and 'undefined'. */
+```
+
+``` Typescript
+/* Null Type - Example02 */
+
+// Search a name from database
+const searchName = (value: string | null) => {
+    if (value === null) {
+        console.log("There is nothing to search!");
+    }
+    else {
+        console.log("Searching");
+    }
+}
+
+searchName(null); // There is nothing to search!
+searchName("partha"); // Searching
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Unknown Types`
+
+``` Typescript
+/* Unknown Types */
+
+// (Convert) kmh^-1 ==> ms^-1
+
+const getMyCarSpeed = (speed: unknown) => {
+    if (typeof speed === "number") {
+        const convertedSpeed = (speed * 1000) / 3600;
+        console.log(`My speed is ${convertedSpeed}`);
+    }
+    else if (typeof speed === 'string') {
+        const [value, unit] = speed.split(" "); // ['10', 'kmh^-1']
+
+        const convertedSpeed = (parseFloat(value) * 1000) / 3600;
+        console.log(`My speed is ${convertedSpeed}`);
+    }
+    else {
+        console.log("There is wrong type");
+    }
+}
+
+getMyCarSpeed(10); // My speed is 2.7777777777777777
+getMyCarSpeed('10 kmh^-1'); // My speed is 2.7777777777777777
+getMyCarSpeed(false); // There is wrong type
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Never Types`
+
+``` Typescript
+/* Never Types */
+
+// If any function never return anything, then we can define this function as never type.
+
+function throwError ( message: string): never {
+    throw new Error(message);
+}
+
+// throwError('Error Happened');
+throwError('Bhai Error hoyeche, please fix it!');
+```
 
 **[🔼Back to Top](#table-of-contents)**
 
