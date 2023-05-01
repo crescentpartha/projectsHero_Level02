@@ -2,14 +2,44 @@
 
 - [Module02: Explore Basic Types of Typescript](#module02-explore-basic-types-of-typescript)
   - [2.1 Installation typescript, nvm \& ts-node-dev](#21-installation-typescript-nvm--ts-node-dev)
+    - [`Resources`](#resources)
+    - [`Some Command and Basic Setup`](#some-command-and-basic-setup)
+    - [`Run .ts and .js files`](#run-ts-and-js-files)
+    - [`Globally accessible variable, function and object`](#globally-accessible-variable-function-and-object)
   - [2.2 Primitive types in typescript](#22-primitive-types-in-typescript)
+    - [`Resources`](#resources-1)
+    - [`Primitive Types`](#primitive-types)
+    - [`Explicit Type` - as we ___declare type___ manually (immediately)](#explicit-type---as-we-declare-type-manually-immediately)
+    - [`Implicit Type` - as we ___don't declare___ any type](#implicit-type---as-we-dont-declare-any-type)
   - [2.3 Array and Tuples in typescript](#23-array-and-tuples-in-typescript)
+    - [`Resources`](#resources-2)
+    - [`Array in Typescript`](#array-in-typescript)
+    - [`Tuples in Typescript`](#tuples-in-typescript)
   - [2.4 Object, Literal Types and Optional Types](#24-object-literal-types-and-optional-types)
+    - [`Resources`](#resources-3)
+    - [`Object in Typescript`](#object-in-typescript)
   - [2.5 Functions in Typescript](#25-functions-in-typescript)
+    - [`Resources`](#resources-4)
+    - [`Normal function`](#normal-function)
+    - [`Arrow function`](#arrow-function)
+    - [`Callback function`](#callback-function)
+    - [`Method in Object`](#method-in-object)
+  - [2.6 Spread, Rest, Default Parameters and Destructuring](#26-spread-rest-default-parameters-and-destructuring)
+    - [`Resources`](#resources-5)
+    - [`Default Parameters` (Incorrect)](#default-parameters-incorrect)
+    - [`Default Parameters` (Correct)](#default-parameters-correct)
+    - [`Spread Operator`](#spread-operator)
+    - [`Normal Invoke Function - Without Rest Parameter/Operator`](#normal-invoke-function---without-rest-parameteroperator)
+    - [`Rest Operator`](#rest-operator)
+    - [`Array Destructuring`](#array-destructuring)
+    - [`Object Destructuring`](#object-destructuring)
+    - [`Notes`](#notes)
 
 # Module02: Explore Basic Types of Typescript
 
 ## 2.1 Installation typescript, nvm & ts-node-dev
+
+### `Resources`
 
 - Install [Node.js](https://nodejs.org/en/download "Download nodejs")
 - [NVM Install Guide - freeCodeCamp](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/)
@@ -17,7 +47,9 @@
 - [Download TypeScript](https://www.typescriptlang.org/download)
 - [ts-node-dev](https://www.npmjs.com/package/ts-node-dev "It helps to run .ts file in the node environments without converting .js file")
 
-💠 `Some Command and Basic Setup`
+**[🔼Back to Top](#table-of-contents)**
+
+### `Some Command and Basic Setup`
 
 ``` JavaStrict
 node -v // v16.15.1
@@ -100,13 +132,33 @@ tsc // It converts all .ts file to .js file in dist folder | Don't need to tell 
 
 **[🔼Back to Top](#table-of-contents)**
 
+### `Run .ts and .js files`
+
+- Run JavaScript file
+  - `node 01primitive-types.js` 
+  - `node dist/01primitive-types.js`
+- Run Typescript file
+  - `npx ts-node-dev 01primitive-types.ts`
+  - `npx ts-node-dev src/01primitive-types.ts`
+  - `npx ts-node-dev --respawn src/01primitive-types.ts`
+
+> `Notes:` `--respawn` flag `reload the terminal` whenever running file modified.
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Globally accessible variable, function and object`
+
+> `Notes:` Every `variable, function and object` are `globally accessible` in different files inside the same folder, So we `can't redeclare` same variable, function and object in different file. <br /> <br /> We need to `setup Node and Express`, to `fix this problem`. 
+
+**[🔼Back to Top](#table-of-contents)**
+
 ## 2.2 Primitive types in typescript
 
-💠 `Resources`
+### `Resources`
 
 - [01primitive-types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/01primitive-types.ts) | [01primitive-types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/01primitive-types.js)
 
-💠 `Primitive Types`
+### `Primitive Types`
 
 - string
 - number
@@ -114,7 +166,7 @@ tsc // It converts all .ts file to .js file in dist folder | Don't need to tell 
 - null
 - undefined
 
-💠 `Explicit Type` - as we ___declare type___ manually (immediately)
+### `Explicit Type` - as we ___declare type___ manually (immediately)
 
 > `Implicit type` means that the type is ___manually declared___ for a variable.
 
@@ -144,7 +196,7 @@ rollNumber.toFixed(); // 46
 rollNumber.toFixed(2); // 46.12
 ```
 
-💠 `Implicit Type` - as we ___don't declare___ any type
+### `Implicit Type` - as we ___don't declare___ any type
 
 > `Implicit type` means that the type is ___automatically declared___ for a variable.
 
@@ -192,11 +244,11 @@ course9 = true;
 
 ## 2.3 Array and Tuples in typescript
 
-💠 `Resources`
+### `Resources`
 
 - [02array-and-tuples.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/02array-and-tuples.ts) | [02array-and-tuples.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/02array-and-tuples.js)
 
-💠 `Array in Typescript`
+### `Array in Typescript`
 
 ``` Typescript
 /* Array in Typescript */
@@ -237,7 +289,7 @@ console.log(names2); // [ 'abul', 'babul', 'kabul', 46, 23, true, 33, 'Apollo', 
 
 **[🔼Back to Top](#table-of-contents)**
 
-💠 `Tuples in Typescript`
+### `Tuples in Typescript`
 
 - Tuples similar to ___couples___ | (Tuples = ___Double/Twice___ = Couples)
 - Tuple = (__key, value__) pair
@@ -269,9 +321,11 @@ console.log(boyfriends2); // [ 'Abul', true ]
 
 ## 2.4 Object, Literal Types and Optional Types
 
-💠 `Resources`
+### `Resources`
 
 - [03object-literal_types-optional_types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/03object-literal_types-optional_types.ts) | [03object-literal_types-optional_types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/03object-literal_types-optional_types.js)
+
+### `Object in Typescript`
 
 ``` Typescript
 /* Object in Typescript */
@@ -315,9 +369,11 @@ console.log(user4.company);
 
 ## 2.5 Functions in Typescript
 
-💠 `Resources`
+### `Resources`
 
 - [04functions.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/04functions.ts) | [04functions.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/04functions.js)
+
+### `Normal function`
 
 ``` Typescript
 // Normal function
@@ -354,12 +410,16 @@ function add(num1: number, num2: number): number { // parameters and return type
 console.log(add(2, 2)); // 4
 ```
 
+### `Arrow function`
+
 ``` Typescript
 // Arrow function
 
 const addArrow = (num1: number, num2: number): number => num1 + num2;
 console.log(addArrow(5, 5)); // 10
 ```
+
+### `Callback function`
 
 ``` Typescript
 // Callback function
@@ -370,6 +430,8 @@ const arr: number[] = [1, 2, 3, 4, 5];
 const newArray = arr.map((element: number) => element * element);
 console.log(newArray); // [ 1, 4, 9, 16, 25 ]
 ```
+
+### `Method in Object`
 
 ``` Typescript
 /* Method in Object */
@@ -400,5 +462,154 @@ console.log(person.addBalance2(10)); // My New Balance is 15
 person.addBalance3(15); // My New Balance is 20
 console.log(person.name, person.balance); // Mezba 5
 ```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 2.6 Spread, Rest, Default Parameters and Destructuring
+
+### `Resources`
+
+- [05spread-rest-default_parameters-and-destructuring.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/05spread-rest-default_parameters-and-destructuring.ts) | [05spread-rest-default_parameters-and-destructuring.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/05spread-rest-default_parameters-and-destructuring.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Default Parameters` (Incorrect)
+
+``` Typescript
+// Default Parameters | 1st parameter (Not use ever)
+
+function add2(num1: number = 10, num2: number): number { // parameters and return type: number | Default Parameter = 10
+    return num1 + num2;
+}
+
+console.log(add2(5, 5)); // 10
+console.log(add2(5)); // We don't use 1st parameter as a default parameter | (use & not use -> means the same) | Show Error
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Default Parameters` (Correct)
+
+``` Typescript
+// Default Parameters | Always use last parameter
+
+function add2(num1: number, num2: number = 10,): number { // parameters and return type: number | Default Parameter = 10
+    return num1 + num2;
+}
+
+console.log(add2(5, 5)); // 10
+console.log(add2(5)); // 15
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Spread Operator`
+
+``` Typescript
+// Spread Operator - Separate the array items
+
+const myFriends: string[] = ['chandler', 'joey', 'ross'];
+const newFriends: string[] = ['monica', 'rachel', 'pheobe'];
+
+myFriends.push(...newFriends);
+console.log(myFriends); // [ 'chandler', 'joey', 'ross', 'monica', 'rachel', 'pheobe' ]
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Normal Invoke Function - Without Rest Parameter/Operator`
+
+``` Typescript
+// Rest Parameter/Operator - Create array by taking all items
+
+// Normal Invoke Function
+
+// const greatFriends = (friend1: string, friend2: string, friend3: string): void => console.log(`Hi ${friend1}\n Hi ${friend2}\n Hi ${friend3}`);
+const greatFriends = (
+    friend1: string,
+    friend2: string,
+    friend3: string
+): void => console.log(`Hi ${friend1} \nHi ${friend2} \nHi ${friend3}`);
+
+greatFriends("Nayeem", "Mohon", "Apu");
+
+/* Output:
+    Hi Nayeem
+    Hi Mohon
+    Hi Apu
+*/
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Rest Operator`
+
+``` Typescript
+// Using Rest Operator
+
+const greatFriends2 = (...friends: string[]): void => console.log(friends); // [ 'Nayeem', 'Mohon', 'Apu', 'Dipu', 'Topu', 'Tomal' ]
+greatFriends2("Nayeem", "Mohon", "Apu", "Dipu", "Topu", "Tomal");
+
+const greatFriends3 = (...friends: string[]): void => console.log(friends.forEach(friend => console.log(`Hi ${friend}`)));
+greatFriends3("Nayeem", "Mohon", "Apu", "Dipu", "Topu", "Tomal");
+
+/* Output:
+    Hi Nayeem
+    Hi Mohon
+    Hi Apu
+    Hi Dipu
+    Hi Topu
+    Hi Tomal
+*/
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Array Destructuring`
+
+``` Typescript
+/* Array and Object Destructuring */
+
+// Array Destructuring
+
+const myFriends2: string[] = ['chandler', 'joey', 'ross'];
+
+// const [bestFriend] = myFriends2;
+// console.log(bestFriend); // chandler
+
+const [bestFriend, goodFriend, roommate] = myFriends2;
+console.log(bestFriend, goodFriend, roommate); // chandler joey ross
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Object Destructuring`
+
+``` Typescript
+// Object Destructuring
+
+const myBestFriends = {
+    friendName: "Pro Hero",
+    age: 25,
+};
+
+// const {friendName} = myBestFriends;
+// console.log(friendName); // Pro Hero
+
+// const {friendName: string} = myBestFriends; // Take as name Alias (Take as name not type)
+// console.log(string); // Pro Hero
+
+const { friendName: string } = myBestFriends; // Take as name Alias (Take as name not type)
+console.log({ string }); // { string: 'Pro Hero' }
+
+// const {friendName: fullname} = myBestFriends; // Take as name Alias
+// console.log(fullname); // Pro Hero
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Notes`
+
+> `Default Parameter` ↪ Always used in ___last parameter___ | It takes ___by-default value___. <br /> `Spread Operator` ↪ used to ___separate the array items___. <br /> `Rest Parameter/Operator` ↪ ___Create array___ by taking all items. <br /> `Array Destructuring` ↪ We can use ___any variable___ to destructure from array. <br /> `Object Destructuring` ↪ We have to use ___given variable or properties___ to destructure from object.
 
 **[🔼Back to Top](#table-of-contents)**
