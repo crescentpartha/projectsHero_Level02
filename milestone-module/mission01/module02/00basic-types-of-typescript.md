@@ -34,13 +34,18 @@
     - [`Array Destructuring`](#array-destructuring)
     - [`Object Destructuring`](#object-destructuring)
     - [`Notes`](#notes)
-  - [`2.7 Type alias and optional types`](#27-type-alias-and-optional-types)
+  - [2.7 Type alias and optional types](#27-type-alias-and-optional-types)
     - [`Resources`](#resources-6)
     - [`Normal typescript Object`](#normal-typescript-object)
     - [`Type Alias`](#type-alias)
     - [`Boolean Type Alias`](#boolean-type-alias)
     - [`string type Alias`](#string-type-alias)
     - [`function type Alias`](#function-type-alias)
+  - [2.8 Union, Intersection and Enum Types](#28-union-intersection-and-enum-types)
+    - [`Resources`](#resources-7)
+    - [`Union Types`](#union-types)
+    - [`Intersection Type`](#intersection-type)
+    - [`Enum Type`](#enum-type)
 
 # Module02: Explore Basic Types of Typescript
 
@@ -621,7 +626,7 @@ console.log({ string }); // { string: 'Pro Hero' }
 
 **[🔼Back to Top](#table-of-contents)**
 
-## `2.7 Type alias and optional types`
+## 2.7 Type alias and optional types
 
 ### `Resources`
 
@@ -739,6 +744,164 @@ console.log(calculate(10, 20, (x, y) => x - y)); // -10
 console.log(calculate(10, 20, (x, y) => x * y)); // 200
 // calculate(10, 20, (x, y) => x + y);
 ```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 2.8 Union, Intersection and Enum Types
+
+### `Resources`
+
+- [07union-intersection-and-enum_types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/07union-intersection-and-enum_types.ts) | [07union-intersection-and-enum_types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/07union-intersection-and-enum_types.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Union Types`
+
+``` Typescript
+/* Union Types */
+
+type NoobDeveloper = {
+    name: string,
+};
+
+type JuniorDeveloper = {
+    name: string, 
+    expertise: string, 
+    experience: number,
+};
+
+// Union Types: | symbol indicate union
+const newDeveloper: NoobDeveloper | JuniorDeveloper = {
+    name: "Moznu Mia",
+    expertise: "Javascript",
+    experience: 1,
+};
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Intersection Type`
+
+``` Typescript
+/* Intersection Type - Example01 */
+
+type NoobDeveloper2 = {
+    name: string,
+};
+
+// Intersection Type
+type JuniorDeveloper2 = NoobDeveloper2 & {
+    expertise: string, 
+    experience: number,
+};
+
+// Union Types
+const newDeveloper2: NoobDeveloper2 | JuniorDeveloper2 = {
+    name: "Moznu Mia",
+    expertise: "Javascript",
+    experience: 1,
+};
+```
+
+``` Typescript
+/* Intersection Type - Example02 */
+
+type NoobDeveloper2 = {
+    name: string,
+};
+
+// Intersection Type
+type JuniorDeveloper2 = NoobDeveloper2 & {
+    expertise: string, 
+    experience: number,
+};
+
+// Intersection Type
+type NextLevelDeveloper = JuniorDeveloper & {
+    leadershipExperience: number,
+    // level: string,
+    level: "junior" | "mid" | "senior",
+};
+
+// Union Types
+const newDeveloper2: NoobDeveloper2 | JuniorDeveloper2 = {
+    name: "Moznu Mia",
+    expertise: "Javascript",
+    experience: 1,
+};
+
+const developer: NextLevelDeveloper = {
+    name: "Next Level Bhai",
+    expertise: "Typescript",
+    experience: 2,
+    leadershipExperience: 1,
+    level: "mid",
+};
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Enum Type`
+
+> `Enum Type:` Used enum ___isn't best practice___. Ignore this type, just know that it exists in typescript. Mostly used `Union and Intersection` types. <br /> Enum, ___initially assign___ properties value `0, 1, 2` etc. But we can overwrite this enum types (example given below).
+
+``` Typescript
+/* Emum Type - Example */
+
+type NoobDeveloper2 = {
+    name: string,
+};
+
+// Intersection Type
+type JuniorDeveloper2 = NoobDeveloper2 & {
+    expertise: string,
+    experience: number,
+};
+
+// Enum Type - Used enum isn't best practice | ignore it but know it exists
+enum Level2 {
+    junior, // 0
+    mid, // 1
+    senior, // 2
+};
+
+// Enum Type - We can overwrite properties
+enum Level {
+    junior = 'junior', // Level.junior = "junior"
+    mid = 'mid', 
+    senior = 'senior', 
+};
+
+// Intersection Type
+type NextLevelDeveloper = JuniorDeveloper & {
+    leadershipExperience: number,
+    // level: string,
+    // level: "junior" | "mid" | "senior",
+    level: Level,
+};
+
+// Union Types
+const newDeveloper2: NoobDeveloper2 | JuniorDeveloper2 = {
+    name: "Moznu Mia",
+    expertise: "Javascript",
+    experience: 1,
+};
+
+const developer: NextLevelDeveloper = {
+    name: "Next Level Bhai",
+    expertise: "Typescript",
+    experience: 2,
+    leadershipExperience: 1,
+    // level: "Mid Level",
+    // level: "mid",
+    level: Level.junior,
+};
+
+console.log(developer.expertise); // Typescript
+console.log(developer.name); // Next Level Bhai
+```
+
+> `Notes:` If we `inherit` any type, then must `use every properties` of this type. Otherwise, it shows error.
 
 **[🔼Back to Top](#table-of-contents)**
 
