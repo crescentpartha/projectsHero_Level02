@@ -55,6 +55,7 @@
     - [`Resources`](#resources-9)
     - [`Ternary Operator`](#ternary-operator)
     - [`Nullish Coalescing Operator`](#nullish-coalescing-operator)
+  - [Quiz 2](#quiz-2)
 
 # Module02: Explore Basic Types of Typescript
 
@@ -275,10 +276,10 @@ course9 = true;
 /* Array in Typescript */
 
 // const names = ["abul", "babul", "kabul"]; // string type (implicitly)
-const names: string[] = ["abul", "babul", "kabul"]; // string type (explicitly)
+const names: string[ ] = ["abul", "babul", "kabul"]; // string type (explicitly)
 
-// const rollNumber: number[] = [23, 46, 4, 5, 99]; // 01primitive-types.ts(9, 5): 'rollNumber' was also declared here
-const rollNumbers: number[] = [23, 46, 4, 5, 99];  // number type (explicitly)
+// const rollNumber: number[ ] = [23, 46, 4, 5, 99]; // 01primitive-types.ts(9, 5): 'rollNumber' was also declared here
+const rollNumbers: number[ ] = [23, 46, 4, 5, 99];  // number type (explicitly)
 
 rollNumbers[8] = 100;
 // rollNumbers[9] = "One"; // Type 'string' is not assignable to type 'number'
@@ -289,10 +290,10 @@ rollNumbers[8] = 100;
 
 // If we use dot (.) symbol after variable, it's automatically suggest different types of variable's methods
 
-const roll: string[] = rollNumbers.map(roll => roll.toPrecision(3));
+const roll: string[ ] = rollNumbers.map(roll => roll.toPrecision(3));
 console.log(roll); // [ '23.0', '46.0', '4.00', '5.00', '99.0', <3 empty items>, '100' ]
 
-const namesLength: number[] = names.map(name => name.length);
+const namesLength: number[ ] = names.map(name => name.length);
 console.log(namesLength); // [ 4, 5, 5 ]
 ```
 
@@ -446,7 +447,7 @@ console.log(addArrow(5, 5)); // 10
 // Callback function
 
 // const arr = [1, 2, 3, 4, 5];
-const arr: number[] = [1, 2, 3, 4, 5];
+const arr: number[ ] = [1, 2, 3, 4, 5];
 
 const newArray = arr.map((element: number) => element * element);
 console.log(newArray); // [ 1, 4, 9, 16, 25 ]
@@ -529,8 +530,8 @@ console.log(add2(5)); // 15
 ``` Typescript
 // Spread Operator - Separate the array items
 
-const myFriends: string[] = ['chandler', 'joey', 'ross'];
-const newFriends: string[] = ['monica', 'rachel', 'pheobe'];
+const myFriends: string[ ] = ['chandler', 'joey', 'ross'];
+const newFriends: string[ ] = ['monica', 'rachel', 'pheobe'];
 
 myFriends.push(...newFriends);
 console.log(myFriends); // [ 'chandler', 'joey', 'ross', 'monica', 'rachel', 'pheobe' ]
@@ -568,10 +569,10 @@ greatFriends("Nayeem", "Mohon", "Apu");
 ``` Typescript
 // Using Rest Operator
 
-const greatFriends2 = (...friends: string[]): void => console.log(friends); // [ 'Nayeem', 'Mohon', 'Apu', 'Dipu', 'Topu', 'Tomal' ]
+const greatFriends2 = (...friends: string[ ]): void => console.log(friends); // [ 'Nayeem', 'Mohon', 'Apu', 'Dipu', 'Topu', 'Tomal' ]
 greatFriends2("Nayeem", "Mohon", "Apu", "Dipu", "Topu", "Tomal");
 
-const greatFriends3 = (...friends: string[]): void => console.log(friends.forEach(friend => console.log(`Hi ${friend}`)));
+const greatFriends3 = (...friends: string[ ]): void => console.log(friends.forEach(friend => console.log(`Hi ${friend}`)));
 greatFriends3("Nayeem", "Mohon", "Apu", "Dipu", "Topu", "Tomal");
 
 /* Output:
@@ -593,7 +594,7 @@ greatFriends3("Nayeem", "Mohon", "Apu", "Dipu", "Topu", "Tomal");
 
 // Array Destructuring
 
-const myFriends2: string[] = ['chandler', 'joey', 'ross'];
+const myFriends2: string[ ] = ['chandler', 'joey', 'ross'];
 
 // const [bestFriend] = myFriends2;
 // console.log(bestFriend); // chandler
@@ -1100,6 +1101,85 @@ const home = manush1?.address?.home ?? "Sweet Home" // default "Sweet Home"
 console.log(home); // Sweet Home
 console.log({ home }); // { home: 'Sweet Home' }
 ```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## Quiz 2
+
+01. __What is TypeScript?__
+
+    - [ ] A server-side scripting language
+    - [ ] A client-side scripting language
+    - [x] __A superset of JavaScript__
+    - [ ] None
+2.   __What type of assignment is this variable, `const course: string = 'Next Level Dev';`?__
+
+     - [x] __Explicit__
+     - [ ] Implicit
+     - [ ] None
+     - [ ] Inplicit
+3.   __What is the difference between `“any”` and `“unknown”` in TypeScript?__
+
+     - [ ] `Any` is a type that can be assigned any value, while `unknown` is a type that is assigned an unknown value.
+     - [x] ___`Any` is a type that can be assigned any value, while `unknown` is a type that can only be assigned a value after a runtime check.___
+     - [ ] `Any` is a type that can only be assigned a value after a runtime check, while `unknown` is a type that is assigned an unknown value.
+     - [ ] There is no difference between `Any` and `unknown`
+4.  __Which of the following is a primitive type in TypeScript?__
+
+    - [ ] Object
+    - [x] __String__
+    - [ ] Array
+    - [ ] All of above
+5.  __Which of the following tuple in TS?__
+
+    - [ ] `let name: string = "John";`
+    - [ ] `let numbers: Array<number> = [1,2,3];`
+    - [x] `let person: [string, number] = ["John", 32];`
+    - [ ] `let age: number = [4,5,6];`
+6.  __What is the difference between an array and a tuple in TypeScript?__
+
+    - [ ] An array can have elements of different data types, while a tuple can only have elements of the same data type.
+    - [x] __An array can have a variable number of elements, while a tuple has a fixed number of elements.__
+    - [ ] An array is mutable, while a tuple is immutable.
+7.   __What is the syntax for declaring an object type in TypeScript?__
+
+     - [ ] `let obj: Object = { key: "value"};`
+     - [ ] `let obj: {} = { key: "value"};`
+     - [x] `let obj: {key: string} = { key: "value"};`
+     - [ ] `let obj: [string, number] = {name: "John", age: 32}`
+8.  __What is the output of the following code?__
+
+    - [ ] Compilation error
+    - [ ] 5 7
+    - [ ] 7 5
+    - [ ] 2 3 5
+    - [ ] none
+
+``` Typescript
+function generateAdder(a: number): (b: number) => number {
+  return function(b: number) {
+    return a + b;
+  };
+}
+
+const addTwo = generateAdder(2);
+console.log(addTwo(3));
+console.log(addTwo(5));
+```
+
+
+9.  __What is a default parameter in TypeScript?__
+
+    - [x] __A parameter that has a default value assigned to it in the function declaration.__
+    - [ ] A parameter that is required to be passed when calling a function.
+    - [ ] A parameter that is used to specify the return type of a function.
+    - [ ] The type checker considers only string assignable to anything.
+10. __How do you define an alias for a type in TypeScript?__
+
+    - [x] __Using the type keyword__
+    - [ ] Using the interface keyword
+    - [ ] Using the class keyword
+    - [ ] Using the alias keyword
 
 **[🔼Back to Top](#table-of-contents)**
 
