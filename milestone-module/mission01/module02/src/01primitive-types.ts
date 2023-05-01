@@ -1,18 +1,18 @@
-"use strict";
 // Explicit Type - as we declare type immediately
 
-let course = "Next Level Web Development 2.0";
+let course: string = "Next Level Web Development 2.0";
+
 // course = 666; // Type 'number' is not assignable to type 'string'
 course = "Apollo Next Level Web Development 2.0";
 console.log(course);
 
-let rollNumber = 123;
+let rollNumber: number = 123;
 // rollNumber = "One Hundred twenty three"; // Type 'string' is not assignable to type 'number'
-
 rollNumber = 46.123;
 rollNumber.toFixed(); // 46
 rollNumber.toFixed(2); // 46.12
-const isAdmin = true;
+
+const isAdmin: boolean = true;
 
 /* -------------------------- */
 
@@ -23,13 +23,14 @@ let rollNumber2 = 123; // number type
 const isAdmin2 = true; // boolean type
 
 let course3; // any type | assign any value 
+
 /* Should not declare in this way because we can assign any value of it */
 course3 = 333;
 course3 = "Next";
 course3 = undefined;
 
 // If we don't know the value of any variable. Then we should define the type without value;
-let course4; // string type
+let course4: string; // string type
 course4 = "Next Level Web Development";
 // course4 = 666; // Type 'number' is not assignable to type 'string'
 
@@ -37,8 +38,8 @@ course4 = "Next Level Web Development";
 
 /* Declaration */
 
-let course5; // null type
-let course6; // undefined type
+let course5: null; // null type
+let course6: undefined; // undefined type
 // const course6: undefined; // 'const' declarations must be initialized
 
 /* Assignment */

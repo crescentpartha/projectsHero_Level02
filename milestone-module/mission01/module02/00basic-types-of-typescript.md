@@ -3,6 +3,7 @@
 - [Module02: Explore Basic Types of Typescript](#module02-explore-basic-types-of-typescript)
   - [2.1 Installation typescript, nvm \& ts-node-dev](#21-installation-typescript-nvm--ts-node-dev)
   - [2.2 Primitive types in typescript](#22-primitive-types-in-typescript)
+  - [2.3 Array and Tuples in typescript](#23-array-and-tuples-in-typescript)
 
 # Module02: Explore Basic Types of Typescript
 
@@ -99,6 +100,10 @@ tsc // It converts all .ts file to .js file in dist folder | Don't need to tell 
 
 ## 2.2 Primitive types in typescript
 
+💠 `Resources`
+
+- [01primitive-types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/01primitive-types.ts) | [01primitive-types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/01primitive-types.js)
+
 💠 `Primitive Types`
 
 - string
@@ -179,6 +184,83 @@ const course8 = undefined; // undefined type
 let course9 = undefined; // any type | assign or reassign any value
 course9 = "Blah Blah";
 course9 = true;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 2.3 Array and Tuples in typescript
+
+💠 `Resources`
+
+- [02array-and-tuples.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/02array-and-tuples.ts) | [02array-and-tuples.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/02array-and-tuples.js)
+
+💠 `Array in Typescript`
+
+``` Typescript
+/* Array in Typescript */
+
+// const names = ["abul", "babul", "kabul"]; // string type (implicitly)
+const names: string[] = ["abul", "babul", "kabul"]; // string type (explicitly)
+
+// const rollNumber: number[] = [23, 46, 4, 5, 99]; // 01primitive-types.ts(9, 5): 'rollNumber' was also declared here
+const rollNumbers: number[] = [23, 46, 4, 5, 99];  // number type (explicitly)
+
+rollNumbers[8] = 100;
+// rollNumbers[9] = "One"; // Type 'string' is not assignable to type 'number'
+```
+
+``` Typescript
+/* Variable's Methods */
+
+// If we use dot (.) symbol after variable, it's automatically suggest different types of variable's methods
+
+const roll: string[] = rollNumbers.map(roll => roll.toPrecision(3));
+console.log(roll); // [ '23.0', '46.0', '4.00', '5.00', '99.0', <3 empty items>, '100' ]
+
+const namesLength: number[] = names.map(name => name.length);
+console.log(namesLength); // [ 4, 5, 5 ]
+```
+
+``` Typescript
+/* Union type or Mixed type */
+
+const names2 = ["abul", "babul", "kabul", 46, 23, true]; // Union type (mixed type) | (string, number, boolean) type
+names2.push(33);
+names2.push("Apollo");
+names2.push(false);
+// names2.push(null); // Argument of type 'null' is not assignable to parameter of type 'string | number | boolean'
+// names2.push(undefined); // Argument of type 'undefined' is not assignable to parameter of type 'string | number | boolean'
+console.log(names2); // [ 'abul', 'babul', 'kabul', 46, 23, true, 33, 'Apollo', false ]
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+💠 `Tuples in Typescript`
+
+- Tuples similar to ___couples___ | (Tuples = ___Double/Twice___ = Couples)
+- Tuple = (__key, value__) pair
+- Tuple is a ___special type of array___
+
+``` Typescript
+const user2 = [23, "Partha"]; // Union type (normal array)
+user2[0] = "Twenty Three";
+console.log(user2); // [ 'Twenty Three', 'Partha' ]
+
+const user: [number, string] = [23, "Crescent"]; // tuples type
+user[1] = "Partha";
+console.log(user); // [ 23, 'Partha' ]
+
+const user1: [number, boolean] = [23, false]; // tuples type
+user1[1] = true;
+console.log(user1); // [ 23, true ]
+```
+
+``` Typescript
+const boyfriends: [string, string] = ["Abul", 'Abila']; // tuples type
+const boyfriends2: [string, boolean] = ["Abul", true]; // tuples type
+
+console.log(boyfriends); // [ 'Abul', 'Abila' ]
+console.log(boyfriends2); // [ 'Abul', true ]
 ```
 
 **[🔼Back to Top](#table-of-contents)**
