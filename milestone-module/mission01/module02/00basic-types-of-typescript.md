@@ -4,6 +4,7 @@
   - [2.1 Installation typescript, nvm \& ts-node-dev](#21-installation-typescript-nvm--ts-node-dev)
   - [2.2 Primitive types in typescript](#22-primitive-types-in-typescript)
   - [2.3 Array and Tuples in typescript](#23-array-and-tuples-in-typescript)
+  - [2.4 Object, Literal Types and Optional Types](#24-object-literal-types-and-optional-types)
 
 # Module02: Explore Basic Types of Typescript
 
@@ -261,6 +262,52 @@ const boyfriends2: [string, boolean] = ["Abul", true]; // tuples type
 
 console.log(boyfriends); // [ 'Abul', 'Abila' ]
 console.log(boyfriends2); // [ 'Abul', true ]
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 2.4 Object, Literal Types and Optional Types
+
+💠 `Resources`
+
+- [03object-literal_types-optional_types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/03object-literal_types-optional_types.ts) | [03object-literal_types-optional_types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/03object-literal_types-optional_types.js)
+
+``` Typescript
+/* Object in Typescript */
+
+// Implicitly, It infers/guess the variable or properties types
+const user3 = {
+    name: "Montu Mia",
+    age: 52,
+    isMarried: true,
+    wife: "Monira Khatun",
+};
+console.log(user3);
+console.log(user3.name);
+```
+
+``` Typescript
+// Explicit type
+const user4: {
+    company: "Programming Hero", // Literal type: (used for specific value)
+    readonly location: string, // readonly | can't assign value
+    name: string,
+    age: number,
+    isMarried: boolean,
+    wife?: string // Optional type or Intersection (?): used because it could be defined or undefined
+} = {
+    company: "Programming Hero",
+    location: "Dhaka",
+    name: "Montu Mia",
+    age: 52,
+    isMarried: true,
+    wife: "Monira Khatun",
+};
+console.log(user4);
+console.log(user4.company);
+
+// user4.company = "Programming Hero Bangladesh"; // Type '"Programming Hero Bangladesh"' is not assignable to type '"Programming Hero"'
+// user4.location = "Sylhet"; // Cannot assign to 'location' because it is a read-only property
 ```
 
 **[🔼Back to Top](#table-of-contents)**
