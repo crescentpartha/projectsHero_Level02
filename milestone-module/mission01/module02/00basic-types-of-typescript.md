@@ -5,6 +5,7 @@
   - [2.2 Primitive types in typescript](#22-primitive-types-in-typescript)
   - [2.3 Array and Tuples in typescript](#23-array-and-tuples-in-typescript)
   - [2.4 Object, Literal Types and Optional Types](#24-object-literal-types-and-optional-types)
+  - [2.5 Functions in Typescript](#25-functions-in-typescript)
 
 # Module02: Explore Basic Types of Typescript
 
@@ -308,6 +309,96 @@ console.log(user4.company);
 
 // user4.company = "Programming Hero Bangladesh"; // Type '"Programming Hero Bangladesh"' is not assignable to type '"Programming Hero"'
 // user4.location = "Sylhet"; // Cannot assign to 'location' because it is a read-only property
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 2.5 Functions in Typescript
+
+💠 `Resources`
+
+- [04functions.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/04functions.ts) | [04functions.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/04functions.js)
+
+``` Typescript
+// Normal function
+
+function add(num1, num2) { // Any type | Show Error
+    return num1 + num2;
+}
+
+// "noImplicitAny": true,    /* Enable error reporting for expressions and declarations with an implied 'any' type. */
+
+/* Replace by false (In tsconfig.json): if you want not to catch error */
+
+"noImplicitAny": false,      /* Enable error reporting for expressions and declarations with an implied 'any' type. */
+
+function add(num1, num2) { // Any type | No Error
+    return num1 + num2;
+}
+add('2', '2');
+```
+
+``` Typescript
+// Normal function
+
+/* 
+function add(num1, num2) { // Any type | Show Error
+    return num1 + num2;
+}
+add('2', '2');
+ */
+
+function add(num1: number, num2: number): number { // parameters and return type: number
+    return num1 + num2;
+}
+console.log(add(2, 2)); // 4
+```
+
+``` Typescript
+// Arrow function
+
+const addArrow = (num1: number, num2: number): number => num1 + num2;
+console.log(addArrow(5, 5)); // 10
+```
+
+``` Typescript
+// Callback function
+
+// const arr = [1, 2, 3, 4, 5];
+const arr: number[] = [1, 2, 3, 4, 5];
+
+const newArray = arr.map((element: number) => element * element);
+console.log(newArray); // [ 1, 4, 9, 16, 25 ]
+```
+
+``` Typescript
+/* Method in Object */
+
+// We can use those function in object as a methods. So, if any function used in object, then we call this Method not a function.
+const person: {
+    name: string;
+    balance: number;
+    addBalance(money: number): number;
+    addBalance2(money: number): string;
+    addBalance3(money: number): void;
+} = {
+    name: "Mezba",
+    balance: 5,
+    addBalance(money: number): number {
+        return this.balance + money;
+    },
+    addBalance2(money: number) {
+        return `My New Balance is ${this.balance + money}`;
+    }, 
+    addBalance3(money: number) {
+        console.log(`My New Balance is ${this.balance + money}`);
+    },
+};
+
+console.log(person.addBalance(5)); // 10
+console.log(person.addBalance2(10)); // My New Balance is 15
+person.addBalance3(15); // My New Balance is 20
+console.log(person.name, person.balance); // Mezba 5
 ```
 
 **[🔼Back to Top](#table-of-contents)**
