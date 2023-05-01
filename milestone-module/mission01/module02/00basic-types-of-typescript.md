@@ -34,6 +34,13 @@
     - [`Array Destructuring`](#array-destructuring)
     - [`Object Destructuring`](#object-destructuring)
     - [`Notes`](#notes)
+  - [`2.7 Type alias and optional types`](#27-type-alias-and-optional-types)
+    - [`Resources`](#resources-6)
+    - [`Normal typescript Object`](#normal-typescript-object)
+    - [`Type Alias`](#type-alias)
+    - [`Boolean Type Alias`](#boolean-type-alias)
+    - [`string type Alias`](#string-type-alias)
+    - [`function type Alias`](#function-type-alias)
 
 # Module02: Explore Basic Types of Typescript
 
@@ -613,3 +620,125 @@ console.log({ string }); // { string: 'Pro Hero' }
 > `Default Parameter` ↪ Always used in ___last parameter___ | It takes ___by-default value___. <br /> `Spread Operator` ↪ used to ___separate the array items___. <br /> `Rest Parameter/Operator` ↪ ___Create array___ by taking all items. <br /> `Array Destructuring` ↪ We can use ___any variable___ to destructure from array. <br /> `Object Destructuring` ↪ We have to use ___given variable or properties___ to destructure from object.
 
 **[🔼Back to Top](#table-of-contents)**
+
+## `2.7 Type alias and optional types`
+
+### `Resources`
+
+- [06type_alias-and-optional_types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/src/06type_alias-and-optional_types.ts) | [06type_alias-and-optional_types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module02/dist/06type_alias-and-optional_types.js)
+
+### `Normal typescript Object`
+
+``` Typescript
+const crush1: {
+    name: string,
+    age: number,
+    profession: string,
+    address: string
+} = {
+    name: "Moyna Pakhi",
+    age: 22,
+    profession: "Web Developer",
+    address: "Uganda"
+};
+
+const crush2: {
+    name: string,
+    age?: number, // Optional type 
+    profession: string,
+    address: string
+} = {
+    name: "Tia Pakhi",
+    profession: "Next Level Web Developer",
+    address: "Mexico"
+};
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Type Alias`
+
+> `Type Alias:` makes more organize and reuseable code. Type Alias not only works for `object`. It also works for `string, array, boolean` etc.
+
+``` Typescript
+// Type-Alias: makes more organize and reuseable code
+
+type CrushType = {
+    name: string,
+    age?: number, // Optional type
+    profession: string,
+    address: string
+}
+
+const crush1: CrushType = {
+    name: "Moyna Pakhi",
+    age: 22,
+    profession: "Web Developer",
+    address: "Uganda"
+};
+
+const crush2: CrushType = {
+    name: "Tia Pakhi",
+    profession: "Next Level Web Developer",
+    address: "Mexico"
+};
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Boolean Type Alias`
+
+``` Typescript
+// const isCrushMarried: boolean = false;
+
+/* Boolean Type Alias */
+
+type CrushMarriedType = boolean;
+const isCrushMarried: CrushMarriedType = false;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `string type Alias`
+
+``` Typescript
+/* string type Alias */
+
+type CourseNameType = string;
+const courseName: CourseNameType = "Next Level Web Development";
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `function type Alias`
+
+``` Typescript
+/* Normal Function */
+
+const calculate = (number1: number, number2: number) => {
+      return number1 + number2;
+};
+calculate(10, 20);
+```
+
+``` Typescript
+/* function type Alias */
+
+type OperationType = (x: number, y: number) => number;
+
+const calculate = (
+    number1: number, // 10
+    number2: number, // 20
+    // operation: (x: number, y: number) => number
+    operation: OperationType // (x, y) => x + y | (10, 20) => 10 + 20
+) => {
+    return operation(number1, number2);
+};
+console.log(calculate(10, 20, (x, y) => x + y)); // 30
+console.log(calculate(10, 20, (x, y) => x - y)); // -10
+console.log(calculate(10, 20, (x, y) => x * y)); // 200
+// calculate(10, 20, (x, y) => x + y);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
