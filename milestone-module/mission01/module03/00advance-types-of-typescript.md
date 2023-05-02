@@ -6,6 +6,15 @@
     - [`Description`](#description)
     - [`Syntax of Type Assertion`](#syntax-of-type-assertion)
     - [`Examples`](#examples)
+  - [3.2 Interface, Type vs Interface](#32-interface-type-vs-interface)
+    - [`Resources`](#resources-1)
+    - [`Examples`](#examples-1)
+      - [`Interface & Type Alias`](#interface--type-alias)
+      - [`Extends another interface`](#extends-another-interface)
+      - [`Extends another type alias`](#extends-another-type-alias)
+      - [`Interface vs Type Alias`](#interface-vs-type-alias)
+      - [`Type Signature in Function using Type Alias & Interface`](#type-signature-in-function-using-type-alias--interface)
+      - [`Type Signature in Array using Type Alias & Interface`](#type-signature-in-array-using-type-alias--interface)
 
 # Module02: Explore Advance Types of Typescript
 
@@ -14,6 +23,7 @@
 ### `Resources`
 
 - [TypeScript Type Assertion](https://www.javatpoint.com/typescript-type-assertion#:~:text=In%20TypeScript%2C%20type%20assertion%20is,type%20using%20a%20type%20assertion.)
+- [01type-assertion.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/src/01type-assertion.ts) | [01type-assertion.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/dist/01type-assertion.js)
 
 **[🔼Back to Top](#table-of-contents)**
 
@@ -112,6 +122,198 @@ try {
     console.log((err as CustomErrorType).message); // (way-01) type assertion
     console.log((<CustomErrorType>err).message); // (way-02) type assertion
 }
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 3.2 Interface, Type vs Interface
+
+### `Resources`
+
+- [Type Aliases vs Interfaces in TypeScript - dev.to](https://dev.to/toluagboola/type-aliases-vs-interfaces-in-typescript-3ggg)
+- [TypeScript - Interfaces](https://www.tutorialspoint.com/typescript/typescript_interfaces.htm)
+- [02interface-type_vs_interface.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/src/02interface-type_vs_interface.ts) | [02interface-type_vs_interface.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/dist/02interface-type_vs_interface.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Interface & Type Alias`
+
+``` Typescript
+/* Interface & Type Alias Example-01 */
+
+// type alias | Object type
+type User = {
+    name: string;
+    age: number;
+};
+
+/* 
+  This object we can present in another way called interface 
+    - We will use type alias for primitive type data
+    - And we will use interface for object type data
+    Facility of using interface - we can extend interface
+*/
+
+// interface
+interface IUser {
+    name: string;
+    age: number;
+}
+
+// Object
+const userWithTypeAlias: User = {
+    name: "Type Alias",
+    age: 100
+};
+userWithTypeAlias.name = "Type alias";
+console.log(userWithTypeAlias.name); // Type alias
+
+// Object
+const userWithInterface: IUser = {
+    name: "Interface",
+    age: 200,
+};
+userWithInterface.name = "interface";
+console.log(userWithInterface.name); // interface
+
+/* Facility of using interface - we can extend interface */
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Extends another interface`
+
+``` Typescript
+/* Interface Example-02 | Extends another interface */
+
+// type alias | Object type
+type User = {
+    name: string;
+    age: number;
+};
+
+// interface
+interface IUser {
+    name: string;
+    age: number;
+}
+
+// extended interface
+interface IExtendedUser extends IUser {
+    role: string;
+}
+
+// object
+const user: IExtendedUser = {
+    name: "Adom",
+    age: 2000,
+    role: "Unknown",
+};
+console.log(user.name); // Adom
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Extends another type alias`
+
+``` Typescript
+/* Type Alias Example-03 | Extends another type alias */
+
+// We can also extend type alias using Union and Intersection
+
+// type alias | Object type
+type User = {
+    name: string;
+    age: number;
+};
+
+type ExtendedUser = User & {
+    role: string;
+};
+
+const user2: ExtendedUser = {
+    name: "Adom",
+    age: 2000,
+    role: "Unknown",
+};
+console.log(user2.name); // Adom
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Interface vs Type Alias`
+
+``` Typescript
+/* Interface & Type Alias Example-04 */
+
+/*
+    For Object - we can use anyone between Interface and Type Alias 
+    For Primitive type - we can use only Type Alias because Primitive type in Typescript is build-in type. So, we can't customize it using interface.
+*/
+
+type rollNumber = number; // we can defined "number type" using Type Alias - It isn't possible using interface
+
+// Interface only for Object type (Object, Function, Array)
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Type Signature in Function using Type Alias & Interface`
+
+``` Typescript
+/* Type Signature in Function using Type Alias & Interface Example-05 */
+
+// type signature using Type Alias
+type addNumbersType = (num1: number, num2: number) => number;
+
+// const addNumbers = (num1: number, num2: number): number => num1 + num2;
+const addNumbers: addNumbersType = (num1, num2) => num1 + num2;
+
+/* --------------------------------- */
+
+// type signature using Interface
+interface IAddNumbers {
+    (num1: number, num2: number): number;
+}
+
+const addNumbers2: IAddNumbers = (num1, num2) => num1 + num2;
+
+// Suggestion: We use Type Alias for function. (Clean Code & Readable)
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Type Signature in Array using Type Alias & Interface`
+
+``` Typescript
+/* Type Signature in Array using Type Alias & Interface Example-06 */
+
+// Array is the special types of object. So, we can use interface instead of type alias.
+
+// using type alias
+type rollNumbersType = number[]
+
+// const rollNumbers: number[] = [1, 2, 3, 4, 5];
+const rollNumbers: rollNumbersType = [1, 2, 3, 4, 5];
+
+/* ----------------------------------------------- */
+
+// using interface
+interface IRollNumbers {
+    [index: number]: number; // Indexing nature (index type : hold type)
+}
+
+// const rollNumbers2: number[] = [1, 2, 3, 4, 5]; // [index]
+const rollNumbers2: IRollNumbers = [1, 2, 3, 4, 5]; // [index]
+
+// Suggestion: Type Alias syntax is more clean & readable instead of interface. So, use Type Alias
+
+/* Thumb Rolls
+    Interface: used for Object (Object, Function, Array, Class)
+    Type Alias: used for Primitive types (number, string, boolean, null, undefined)
+*/
 ```
 
 **[🔼Back to Top](#table-of-contents)**
