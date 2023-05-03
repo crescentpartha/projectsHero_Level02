@@ -33,6 +33,14 @@
       - [`Declare multiple generic type inside the Interface`](#declare-multiple-generic-type-inside-the-interface)
       - [`Declare multiple generic type inside the Interface along with Default Parameter`](#declare-multiple-generic-type-inside-the-interface-along-with-default-parameter)
       - [`Declare multiple generic type inside the Interface along with Default Parameter (for object)`](#declare-multiple-generic-type-inside-the-interface-along-with-default-parameter-for-object)
+  - [3.5 Generic in Function](#35-generic-in-function)
+    - [`Resources`](#resources-4)
+    - [`Examples`](#examples-4)
+      - [`Generic Arrow Function`](#generic-arrow-function)
+      - [`(More than one) Generic Arrow Function`](#more-than-one-generic-arrow-function)
+      - [`Spread Operator in Arrow Function`](#spread-operator-in-arrow-function)
+      - [`Generic in Arrow Function`](#generic-in-arrow-function)
+      - [`Generic in Normal Function`](#generic-in-normal-function)
 
 # Module02: Explore Advance Types of Typescript
 
@@ -800,6 +808,131 @@ const crush3: CrushInterface<PersonInterface, PersonInterface> = {
     - Declare multiple generic type inside the Interface like <T, U> = <husband, wife>
     - For type, we can use Default type or parameter
 */
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 3.5 Generic in Function
+
+### `Resources`
+
+- [05generic-in-function.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/src/05generic-in-function.ts) | [05generic-in-function.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/dist/05generic-in-function.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Generic Arrow Function`
+
+``` Typescript
+// Normal Arrow Function
+const createArray1 = (param: string): string[] => {
+    return [param];
+};
+const result1 = createArray1('Bangladesh');
+
+/* ------------------------------------------ */
+
+// Generic Arrow Function
+const createArray2 = <T>(param: T): T[] => {
+    return [param];
+};
+const result2 = createArray2<string>('Bangladesh');
+const result3 = createArray2<boolean>(true);
+const result4 = createArray2<object>({ name: "Bangladesh" }); // don't declare object in this way
+const result5 = createArray2<{ name: string }>({ name: "Bangladesh" });
+
+type Name = { name: string };
+const result6 = createArray2<Name>({ name: "Bangladesh" });
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `(More than one) Generic Arrow Function`
+
+``` Typescript
+// (More than one) Generic Arrow Function
+
+const createArray2 = <X,Y>(param1: X, param2: Y): [X,Y] => {
+    return [param1, param2];
+};
+
+const result1 = createArray2<string, string>('Bangladesh', 'I love my country');
+const result3 = createArray2<boolean, [string]>(true, ["USA"]);
+const result2 = createArray2<boolean, Array<string>>(true, ["USA"]);
+const result4 = createArray2<object, boolean>({ name: "Bangladesh" }, true); // don't declare object in this way
+const result5 = createArray2<{ name: string }, boolean>({ name: "Bangladesh" }, true);
+
+type Name = { name: string };
+const result6 = createArray2<Name, unknown>({ name: "Bangladesh" }, null);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Spread Operator in Arrow Function`
+
+``` Typescript
+// Spread Operator
+
+const crush = "Tailor Swift";
+const myInfo = {
+    name: "Crescent",
+    age: 25,
+    salary: 10000000,
+};
+const newData = {...myInfo, crush};
+
+// Spread Operator in Arrow Function
+const addMeInMyCrushMind = (myInfo: object) => {
+    const crush = "Tailor Swift";
+    const newData = {...myInfo, crush}; // Spread Operator doesn't apply 
+    /* 
+        Only crush data found in newData because typescript defined type before compile the code.
+        In this situation, we can infer/guess type by using generic
+    */
+    return newData;
+}
+const result = addMeInMyCrushMind(myInfo);
+// result. // only crush data found | myInfo data not found
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic in Arrow Function`
+
+``` Typescript
+// Spread Operator
+
+const crush = "Tailor Swift";
+const myInfo = {
+    name: "Crescent",
+    age: 25,
+    salary: 10000000,
+};
+const newData = {...myInfo, crush};
+
+// Generic in Arrow Function
+const addMeInMyCrushMind = <T>(myInfo: T) => {
+    const crush = "Tailor Swift";
+    const newData = {...myInfo, crush}; // Spread Operator applied after using generic
+    return newData;
+}
+const result = addMeInMyCrushMind(myInfo);
+// result. // found all data
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic in Normal Function`
+
+``` Typescript
+// Generic in Normal Function
+
+function createArray<X, Y>(param1: X, param2: Y): [X, Y] {
+    return [param1, param2];
+};
+const result = createArray("Crescent", "Tailor Swift");
+console.log(result); // [ 'Crescent', 'Tailor Swift' ]
 ```
 
 **[🔼Back to Top](#table-of-contents)**
