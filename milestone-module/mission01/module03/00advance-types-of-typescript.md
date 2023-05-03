@@ -15,6 +15,16 @@
       - [`Interface vs Type Alias`](#interface-vs-type-alias)
       - [`Type Signature in Function using Type Alias & Interface`](#type-signature-in-function-using-type-alias--interface)
       - [`Type Signature in Array using Type Alias & Interface`](#type-signature-in-array-using-type-alias--interface)
+  - [3.3 Introduction of Generic in Type](#33-introduction-of-generic-in-type)
+    - [`Resources`](#resources-2)
+    - [`Examples`](#examples-2)
+      - [`Array Declaration in 2 ways`](#array-declaration-in-2-ways)
+      - [`Type Alias`](#type-alias)
+      - [`Generic (type alias) | Example-03`](#generic-type-alias--example-03)
+      - [`Generic (type alias) | Example-04`](#generic-type-alias--example-04)
+      - [`Generic (Tuple - type alias) | Example-05` ___Bed Practice (using Object)___](#generic-tuple---type-alias--example-05-bed-practice-using-object)
+      - [`Generic (Tuple - type alias) | Example-06` ___Bed Practice (using Object)___](#generic-tuple---type-alias--example-06-bed-practice-using-object)
+      - [`Generic (Tuple - type alias) | Example-07` ___Good Practice___](#generic-tuple---type-alias--example-07-good-practice)
 
 # Module02: Explore Advance Types of Typescript
 
@@ -314,6 +324,246 @@ const rollNumbers2: IRollNumbers = [1, 2, 3, 4, 5]; // [index]
     Interface: used for Object (Object, Function, Array, Class)
     Type Alias: used for Primitive types (number, string, boolean, null, undefined)
 */
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 3.3 Introduction of Generic in Type
+
+### `Resources`
+
+- [03generic-in-type.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/src/03generic-in-type.ts) | [03generic-in-type.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/dist/03generic-in-type.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Array Declaration in 2 ways`
+
+``` Typescript
+/* Array Declaration in 2 ways */
+
+// way-01 | array declaration
+const classRollNumbers: number[] = [44, 23, 12, 4];
+const classRollNumbers2: string[] = ["44", "23", "12", "4"];
+
+// way-02 | array declaration
+const classRollNumbers3: Array<number> = [44, 23, 12, 4];
+const classRollNumbers4: Array<string> = ["44", "23", "12", "4"];
+const classRollNumbers5: Array<boolean> = [true, false];
+
+// object declaration
+const userNameAndRollNumbers: Array<{ name: string; roll: number }> = [
+    {
+        name: "Mr. X",
+        roll: 1,
+    },
+    {
+        name: "Mr. Y",
+        roll: 2,
+    },
+];
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Type Alias`
+
+``` Typescript
+/* Type Alias */
+
+// type alias
+type GenericArray = Array<number>;
+type GenericArray1 = Array<string>;
+type GenericArray2 = Array<boolean>;
+
+// way-02 | array declaration
+const classRollNumbers: GenericArray = [44, 23, 12, 4];
+const classRollNumbers1: GenericArray1 = ["44", "23", "12", "4"];
+const classRollNumbers2: GenericArray2 = [true, false];
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic (type alias) | Example-03`
+
+``` Typescript
+/* Generic in Type */
+
+/* 
+    - write in a general way is called Generic
+    - We need to create generic in this way that consider any types.
+
+    add(x,y) // (function) parameters x and y
+    add(3,4) // (invoke function) pass arguments x and y
+*/
+
+// Generic (type alias)
+type GenericArray<T> = Array<T>; // 1st <T> acts like a parameter
+
+// way-02 | array declaration
+const classRollNumbers: GenericArray<number> = [44, 23, 12, 4];
+const classRollNumbers1: GenericArray<string> = ["44", "23", "12", "4"];
+const classRollNumbers2: GenericArray<boolean> = [true, false];
+
+const userNameAndRollNumbers: GenericArray<{ name: string; roll: number }> = [
+    {
+        name: "Mr. X",
+        roll: 1,
+    },
+    {
+        name: "Mr. Y",
+        roll: 2,
+    },
+];
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic (type alias) | Example-04`
+
+``` Typescript
+/* Generic in Type */
+
+// Generic (type alias)
+type GenericArray<T> = Array<T>; 
+
+// way-02 | array declaration
+const classRollNumbers: GenericArray<number> = [44, 23, 12, 4];
+const classRollNumbers1: GenericArray<string> = ["44", "23", "12", "4"];
+const classRollNumbers2: GenericArray<boolean> = [true, false];
+
+// Generic (Type Alias)
+type NameRollType = { name: string; roll: number };
+
+const userNameAndRollNumbers: GenericArray<NameRollType> = [
+    {
+        name: "Mr. X",
+        roll: 1,
+    },
+    {
+        name: "Mr. Y",
+        roll: 2,
+    },
+];
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic (Tuple - type alias) | Example-05` ___Bed Practice (using Object)___
+
+``` Typescript
+/* Generic in Type */
+
+/* 
+    We can add more parameter using Tuples like
+    add(x, y, z)
+    add(2, 3, 4)
+*/
+
+// Generic (Tuple - type alias)
+type GenericTuple<X, Y> = [X, Y];
+
+// create variable
+const relation: GenericTuple<string, string> = ['Persian', 'Kate Winslet'];
+
+// But it isn't best practice because object would have different properties
+const relationWithSalary: GenericTuple<object, string> = [
+    {
+        name: "Persian",
+        salary: 1000000000, 
+    },
+    "Kate Winslet",
+];
+
+// Bed practice (using Object)
+const relationWithSalary2: GenericTuple<object, string> = [
+    {
+        age: 25, // we use age property instead of name, so this isn't valid object
+        salary: 1000000000, 
+    },
+    "Kate Winslet",
+];
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic (Tuple - type alias) | Example-06` ___Bed Practice (using Object)___
+
+``` Typescript
+/* Generic in Type */
+
+/* 
+    We can add more parameter using Tuples like
+    add(x, y, z)
+    add(2, 3, 4)
+*/
+
+// Generic (Tuple - type alias)
+type GenericTuple<X, Y> = [X, Y];
+
+// create variable
+const relation: GenericTuple<string, string> = ['Persian', 'Kate Winslet'];
+
+// But it isn't best practice because object would have different properties
+const relationWithSalary: GenericTuple<object, string> = [
+    {
+        name: "Persian",
+        salary: 1000000000, 
+    },
+    "Kate Winslet",
+];
+
+// Bed practice (using Object)
+const relationWithSalary2: GenericTuple<{name: string, salary: number}, string> = [
+    {
+        // age: 25, // we use age property instead of name, so this isn't valid object
+        name: "Persian",
+        salary: 1000000000, 
+    },
+    "Kate Winslet",
+];
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic (Tuple - type alias) | Example-07` ___Good Practice___
+
+``` Typescript
+/* Generic in Type */
+
+/* 
+    We can add more parameter using Tuples like
+    add(x, y, z)
+    add(2, 3, 4)
+*/
+
+// Generic (Tuple - type alias)
+type GenericTuple<X, Y> = [X, Y];
+
+// create variable
+const relation: GenericTuple<string, string> = ['Persian', 'Kate Winslet'];
+
+// Generic (type alias) | we can also use interface instead
+type RelationWithSalaryType = { name: string, salary: number };
+
+// Good Practice
+const relationWithSalary: GenericTuple<RelationWithSalaryType, string> = [
+    {
+        name: "Persian",
+        salary: 1000000000,
+    },
+    "Kate Winslet",
+];
+
+// Good Practice
+const relationWithSalary2: GenericTuple<RelationWithSalaryType, string> = [
+    {
+        name: "Persian",
+        salary: 1000000000,
+    },
+    "Kate Winslet",
+];
 ```
 
 **[🔼Back to Top](#table-of-contents)**
