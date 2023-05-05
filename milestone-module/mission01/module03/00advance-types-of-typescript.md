@@ -41,6 +41,13 @@
       - [`Spread Operator in Arrow Function`](#spread-operator-in-arrow-function)
       - [`Generic in Arrow Function`](#generic-in-arrow-function)
       - [`Generic in Normal Function`](#generic-in-normal-function)
+  - [3.6 Constraints in Generics](#36-constraints-in-generics)
+    - [`Resources`](#resources-5)
+    - [`Examples`](#examples-5)
+      - [`Normal Generic Function`](#normal-generic-function)
+      - [`Generic Constraints`](#generic-constraints)
+      - [`Generic Constraints with Type Alias`](#generic-constraints-with-type-alias)
+      - [`Generic Constraints with Interface`](#generic-constraints-with-interface)
 
 # Module02: Explore Advance Types of Typescript
 
@@ -936,4 +943,157 @@ console.log(result); // [ 'Crescent', 'Tailor Swift' ]
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## 3.6 Constraints in Generics
+
+### `Resources`
+
+- [06constraints-in-generics.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/src/06constraints-in-generics.ts) | [06constraints-in-generics.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/dist/06constraints-in-generics.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Normal Generic Function`
+
+``` Typescript
+/* Normal Generic Function */
+
+const addMeInMyCrushMind = <T>(myInfo: T) => {
+    const crush = "Tailor Swift";
+    const newData = { ...myInfo, crush }; // Spread Operator applied after using generic
+    return newData;
+}
+
+type myInfoType = {
+    name: string;
+    age: number;
+    salary: number;
+}
+
+const myInfo: myInfoType = {
+    name: "Crescent",
+    age: 25,
+    salary: 10000000,
+};
+const results1 = addMeInMyCrushMind({ MonerKushi: "Hashi Kushi" }); // accept any type/properties of object
+
+/* So, We need to use generic constraints to constrain the types in generic functions to specific types. */
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic Constraints`
+
+> `Generic Constraints` in TypeScript ___to constrain the types___ in generic functions to ___specific types___. <br /> <br /> `Generic Type:` It ___accepts any types___ of data or properties in function or variable. <br /> `Generic Constraints:` It ___constrains to generic type___ and ___defined the specific types___ of particular properties in function.
+
+``` Typescript
+/* Generic Constraints */
+
+// generic constraints in TypeScript to constrain the types in generic functions to specific types.
+
+const addMeInMyCrushMind = <T extends {name: string, age: number, salary: number}>(myInfo: T) => {
+    const crush = "Tailor Swift";
+    const newData = { ...myInfo, crush }; // Spread Operator applied after using generic
+    return newData;
+}
+
+type myInfoType = {
+    name: string;
+    age: number;
+    salary: number;
+    other1: boolean,
+    other2: null
+}
+
+const myInfo: myInfoType = {
+    name: "Crescent",
+    age: 25,
+    salary: 10000000,
+    other1: false,
+    other2: null
+};
+// const results1 = addMeInMyCrushMind({ MonerKushi: "Hashi Kushi" }); // accept any type/properties of object
+
+const results2 = addMeInMyCrushMind<myInfoType>(myInfo);
+// results2. // other1 and other2 also included
+```
+
+> `Notes:` So, if we use `generic constraints` using `<T extends {name: string, age: number, salary: number}>`, <br /> We must need to ___pass___ `name, age and salary` properties inside the object. <br />We can `also pass other properties` too but need to `mention in type generic` like ___myInfoType___
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic Constraints with Type Alias`
+
+``` Typescript
+/* Generic Constraints with Type Alias */
+
+// make more organize & readable code
+type MandatoryTypes = {name: string, age: number, salary: number};
+
+const addMeInMyCrushMind = <T extends MandatoryTypes>(myInfo: T) => {
+    const crush = "Tailor Swift";
+    const newData = { ...myInfo, crush }; // Spread Operator applied after using generic
+    return newData;
+}
+
+type myInfoType = {
+    name: string;
+    age: number;
+    salary: number;
+    other1: boolean,
+    other2: null
+}
+
+const myInfo: myInfoType = {
+    name: "Crescent",
+    age: 25,
+    salary: 10000000,
+    other1: false,
+    other2: null
+};
+
+const results2 = addMeInMyCrushMind<myInfoType>(myInfo);
+// results2. // other1 and other2 also included
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic Constraints with Interface`
+
+``` Typescript
+/* Generic Constraints with Interface */
+
+// make more organize & readable code
+// type MandatoryTypes = {name: string, age: number, salary: number};
+interface MandatoryInterface {name: string, age: number, salary: number};
+
+const addMeInMyCrushMind = <T extends MandatoryInterface>(myInfo: T) => {
+    const crush = "Tailor Swift";
+    const newData = { ...myInfo, crush }; // Spread Operator applied after using generic
+    return newData;
+}
+
+type myInfoType = {
+    name: string;
+    age: number;
+    salary: number;
+    other1: boolean,
+    other2: null
+}
+
+const myInfo: myInfoType = {
+    name: "Crescent",
+    age: 25,
+    salary: 10000000,
+    other1: false,
+    other2: null
+};
+
+const results2 = addMeInMyCrushMind<myInfoType>(myInfo);
+// results2. // other1 and other2 also included
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
 
