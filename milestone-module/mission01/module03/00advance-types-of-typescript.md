@@ -48,6 +48,11 @@
       - [`Generic Constraints`](#generic-constraints)
       - [`Generic Constraints with Type Alias`](#generic-constraints-with-type-alias)
       - [`Generic Constraints with Interface`](#generic-constraints-with-interface)
+  - [3.7 Generic Constraints Using Key Of (Part-01)](#37-generic-constraints-using-key-of-part-01)
+    - [`Resources`](#resources-6)
+    - [`Examples`](#examples-6)
+      - [`About keyof`](#about-keyof)
+      - [`Generic Constraints using keyof`](#generic-constraints-using-keyof)
 
 # Module02: Explore Advance Types of Typescript
 
@@ -1096,4 +1101,71 @@ const results2 = addMeInMyCrushMind<myInfoType>(myInfo);
 
 **[🔼Back to Top](#table-of-contents)**
 
+## 3.7 Generic Constraints Using Key Of (Part-01)
+
+### `Resources`
+
+- [07generic-keyof-constraints.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/src/07generic-keyof-constraints.ts) | [07generic-keyof-constraints.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/dist/07generic-keyof-constraints.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `About keyof`
+
+``` Typescript
+/* 
+    - keyof is a keyword in TypeScript which is used to extract the key type from an object type.
+    - When used on an object type with explicit keys, keyof creates a union type with those keys.
+    - If you want to get the key in the object type, you need to use the keyof type operator.
+    - using key of one type (object), we can create another type (object) where it will be union type of those keys
+*/
+
+type PersonType = {
+    name: string;
+    age: number;
+    address: string;
+}
+
+type newType = 'name' | 'age' | 'address'; // Union type | did manually
+
+type newTypeUsingKeyOf = keyof PersonType; // using keyof (did same thing as newType)
+
+const a: newType = 'age';
+const b: newTypeUsingKeyOf = 'age';
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic Constraints using keyof`
+
+``` Typescript
+/* Generic Constraints using keyof */
+
+/* 
+    Problem Statement: I want to create a generic function where I pass an object and a key (as object key) 
+Ex:
+    ({name: 'Mr.X', age: 100}, 'name') // Mr.X (return)
+    ({name: 'Mr.X', age: 100}, 'age') // 100 (return)
+
+    const a = {
+        name: 'Mr.X',
+        age: 100
+    }
+    a['name']
+    a['age']
+*/
+
+// normal function
+function getProperty<X, Y extends keyof X> (obj: X, key: Y) {
+    // Y = 'name' | 'age'; // Union type key object
+    obj[key];
+}
+const property1 = getProperty({name: "Mr. X", age: 100}, "age");
+// const property2 = getProperty({name: "Mr. X", age: 100}, "salary"); // Argument of type '"salary"' is not assignable to parameter of type '"age" | "name"'
+
+// So, using keyof, one generic type constraint/force to another generic type
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
