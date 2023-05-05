@@ -53,6 +53,15 @@
     - [`Examples`](#examples-6)
       - [`About keyof`](#about-keyof)
       - [`Generic Constraints using keyof`](#generic-constraints-using-keyof)
+  - [3.8 Asynchronous TypeScript](#38-asynchronous-typescript)
+    - [`Resources`](#resources-7)
+    - [`Examples`](#examples-7)
+      - [`String Promise`](#string-promise)
+      - [`Boolean Promise`](#boolean-promise)
+      - [`Object Promise`](#object-promise)
+      - [`Make Promise using Type Alias`](#make-promise-using-type-alias)
+      - [`Make Promise using Interface`](#make-promise-using-interface)
+      - [`JSON Placeholder`](#json-placeholder)
 
 # Module02: Explore Advance Types of Typescript
 
@@ -1165,6 +1174,197 @@ const property1 = getProperty({name: "Mr. X", age: 100}, "age");
 // const property2 = getProperty({name: "Mr. X", age: 100}, "salary"); // Argument of type '"salary"' is not assignable to parameter of type '"age" | "name"'
 
 // So, using keyof, one generic type constraint/force to another generic type
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 3.8 Asynchronous TypeScript
+
+### `Resources`
+
+- [08asynchronous-typescript.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/src/08asynchronous-typescript.ts) | [08asynchronous-typescript.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/dist/08asynchronous-typescript.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `String Promise`
+
+``` Typescript
+/* String Promise */
+
+/* 
+    Mocking - doesn't fetch data from server or outside | data created by own
+*/
+
+// Mocking
+const makePromise = (): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
+        const data: string = 'Data is fetched';
+        if (data) {
+            resolve(data);
+        }
+        else {
+            reject("Error Message: Failed to fetched data!");
+        }
+    })
+}
+
+// const result1 = await makePromise(); // can't use await
+
+const getPromiseData = async (): Promise<string> => {
+    const data = await makePromise();
+    console.log(data);
+    return data;
+}
+
+// Promise<string> Promise<boolean> Promise<object>
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Boolean Promise`
+
+``` Typescript
+/* Boolean Promise */
+
+// Mocking
+const makePromiseBoolean = (): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
+        const data: boolean = false;
+        if (data) {
+            resolve(data);
+        }
+        else {
+            reject("Error Message: Failed to fetched data!");
+        }
+    })
+}
+
+const getPromiseDataBoolean = async (): Promise<boolean> => {
+    const data = await makePromiseBoolean();
+    console.log(data);
+    return data;
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Object Promise`
+
+``` Typescript
+/* Object Promise */
+
+// Mocking
+const makePromiseObject = (): Promise<object> => { // directly use object type isn't good practice
+    return new Promise<object>((resolve, reject) => {
+        const data: object = {data: 'Data is fetched'};
+        if (data) {
+            resolve(data);
+        }
+        else {
+            reject("Error Message: Failed to fetched data!");
+        }
+    })
+}
+
+const getPromiseDataObject = async (): Promise<object> => {
+    const data = await makePromiseObject();
+    console.log(data);
+    return data;
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Make Promise using Type Alias`
+
+``` Typescript
+/* Make Promise using Type Alias */
+
+// type alias
+type DataType = {
+    data: string;
+}
+
+// Mocking
+const makePromiseTypeAlias = (): Promise<DataType> => { // make promise using type alias (best practice)
+    return new Promise<DataType>((resolve, reject) => {
+        const data: DataType = {data: 'Data is fetched'};
+        if (data) {
+            resolve(data);
+        }
+        else {
+            reject("Error Message: Failed to fetched data!");
+        }
+    })
+}
+
+const getPromiseDataObject = async (): Promise<DataType> => {
+    const data = await makePromiseTypeAlias();
+    console.log(data);
+    return data;
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Make Promise using Interface`
+
+``` Typescript
+/* Make Promise using Interface */
+
+// interface
+interface DataType {
+    data: string;
+}
+
+// Mocking
+const makePromiseInterface = (): Promise<DataType> => { // make promise using type alias (best practice)
+    return new Promise<DataType>((resolve, reject) => {
+        const data: DataType = {data: 'Data is fetched'};
+        if (data) {
+            resolve(data);
+        }
+        else {
+            reject("Error Message: Failed to fetched data!");
+        }
+    })
+}
+
+const getPromiseDataObject = async (): Promise<DataType> => {
+    const data = await makePromiseInterface();
+    console.log(data);
+    return data;
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `JSON Placeholder`
+
+``` Typescript
+/* JSON Placeholder */
+
+// When the API data is small, we can write an interface for it
+interface ITodo {
+    userId: number;
+    id: number;
+    title: string;
+    completed: boolean;
+}
+
+const getTodo = async (): Promise<ITodo> => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    return await response.json();
+}
+
+const getTodoData = async (): Promise<void> => {
+    const result = await getTodo();
+    console.log(result);
+}
+
+getTodoData(); // { userId: 1, id: 1, title: 'delectus aut autem', completed: false }
 ```
 
 **[🔼Back to Top](#table-of-contents)**
