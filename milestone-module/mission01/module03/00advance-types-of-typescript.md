@@ -71,6 +71,17 @@
       - [`Conditional Type with Generic keyof Constraints`](#conditional-type-with-generic-keyof-constraints)
       - [`Conditional Type with type literal`](#conditional-type-with-type-literal)
       - [`Conditional Type with generic type literal`](#conditional-type-with-generic-type-literal)
+  - [3.10 Mapped Types](#310-mapped-types)
+    - [`Resources`](#resources-9)
+    - [`Examples`](#examples-9)
+      - [`Normal .map method to convert number to string types`](#normal-map-method-to-convert-number-to-string-types)
+      - [`Access the properties of type or object`](#access-the-properties-of-type-or-object)
+      - [`Create various type alias to convert properties type (manually)`](#create-various-type-alias-to-convert-properties-type-manually)
+      - [`Can't assign anything to read-only property`](#cant-assign-anything-to-read-only-property)
+      - [`Mapped Types - using keyof`](#mapped-types---using-keyof)
+      - [`Mapped Types - Look up types`](#mapped-types---look-up-types)
+      - [`Generic Mapped Types`](#generic-mapped-types)
+      - [`Generic Mapped Types - readonly`](#generic-mapped-types---readonly)
 
 # Module02: Explore Advance Types of Typescript
 
@@ -1500,6 +1511,202 @@ type CurrentBandhubi1 = RemoveBandhubi<Bandhubi, 'Rachel'>; // "Monika" | "Pheob
 type CurrentBandhubi2 = RemoveBandhubi<Bandhubi, 'Monika'>; // "Rachel" | "Pheobe"
 type CurrentBandhubi3 = RemoveBandhubi<Bandhubi, 'Pheobe'>; // "Monika" | "Rachel"
 type CurrentBandhubi4 = RemoveBandhubi<Bandhubi, 'Crescent'>; // "Monika" | "Rachel" | "Pheobe"
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 3.10 Mapped Types
+
+### `Resources`
+
+- [10mapped-types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/src/10mapped-types.ts) | [10mapped-types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module03/dist/10mapped-types.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Normal .map method to convert number to string types`
+
+``` Typescript
+/* Normal .map method to convert number to string types */
+
+const arrayOfNumbers = [1, 2, 3];
+
+const arrayOfStrings = arrayOfNumbers.map((number) => number.toString());
+
+console.log(arrayOfStrings); // [ '1', '2', '3' ]
+
+// Notes: Mapped types work in a same way.
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Access the properties of type or object`
+
+``` Typescript
+// access the property of type
+type A = AreaNumber['height']; // look up types
+type B = keyof AreaNumber; // 'height' | 'width' (Union return type)
+
+// access the property of object
+const obj = {
+    name: 'Persian'
+}
+console.log(obj['name']); // Persian
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Create various type alias to convert properties type (manually)`
+
+``` Typescript
+/* Create various type alias to convert properties type (manually) */
+
+// for number type
+type AreaNumber = {
+    height: number;
+    width: number;
+};
+
+// for string type
+type AreaString = {
+    height: string;
+    width: string;
+};
+
+const rectangularArea: AreaNumber = {
+    height: 10,
+    width: 12,
+};
+
+rectangularArea.width = 10;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Can't assign anything to read-only property`
+
+``` Typescript
+/* Can't assign anything to read-only property */
+
+type AreaNumber = {
+    height: number;
+    width: number;
+};
+
+type AreaString = {
+    height: string;
+    width: string;
+};
+
+type AreaReadonly = {
+    readonly height: number;
+    readonly width: number;
+}
+
+const rectangularArea: AreaReadonly = {
+    height: 10,
+    width: 12,
+};
+
+// rectangularArea.width = 10; // Cannot assign to 'width' because it is a read-only property.
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Mapped Types - using keyof`
+
+``` Typescript
+/* Mapped Types - using keyof */
+
+type Volume = {
+    height: number;
+    width: number;
+    depth: number;
+};
+
+type Area = {
+    // [key in "Persian" | "Porhan"]: string;
+    // [key in "Persian" | "Porhan"]: number;
+    // [key in 'height' | 'width']: number;
+
+    // [key in keyof Volume]: string;
+    // [key in keyof Volume]: number;
+    [key in keyof Volume]: boolean;
+
+    // So, using Mapped Type, we can create/convert one type to another type. Also, we explicitly tell the type.
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Mapped Types - Look up types`
+
+``` Typescript
+/* Mapped Types - Look up types */
+
+type Volume = {
+    height: number;
+    width: string;
+    depth: number;
+};
+
+type Area = {
+    [key in keyof Volume]: Volume[key]; // Look up types | type could be automatically change based on Volume type
+    // Volume['height'] --> number (Look up types)
+    // Volume['width'] --> string (Look up types)
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic Mapped Types`
+
+``` Typescript
+/* Generic Mapped Types */
+
+type Volume = {
+    height: number;
+    width: string;
+    depth: number;
+};
+
+type Area<T> = {
+    // [key in keyof Volume]: Volume[key];
+    // [index in keyof T]: T[index]; // using index or key (means the same)
+    [key in keyof T]: T[key];
+}
+
+const area1: Area<{name: string}> = {name: 'Persian'}; 
+const area2: Area<{height: number, width: number}> = {height: 10, width: 12}; 
+const area3: Area<{height: number, width: string}> = {height: 10, width: "Twelve"};
+
+area2.height = 17; // we can assign the value
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Generic Mapped Types - readonly`
+
+``` Typescript
+/* Generic Mapped Types - readonly */
+
+type Volume = {
+    height: number;
+    width: string;
+    depth: number;
+};
+
+type Area<T> = {
+    // [key in keyof T]: T[key];
+    readonly [key in keyof T]: T[key];
+}
+
+const area1: Area<{height: number, width: string}> = {height: 10, width: "Twelve"};
+
+// area1.height = 17; // Cannot assign to 'height' because it is a read-only property.
+
+/* So, using Mapped Type, we can create/convert one type to another type through mapping. We also can dynamic the object type */
 ```
 
 **[🔼Back to Top](#table-of-contents)**
