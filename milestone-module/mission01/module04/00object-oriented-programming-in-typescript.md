@@ -39,6 +39,10 @@
       - [`In guard`](#in-guard)
       - [`instanceof guard`](#instanceof-guard)
       - [`Check Type using Function with Type Guard`](#check-type-using-function-with-type-guard)
+  - [4.5 Access Modifiers: Public, Private, Protected, Readonly](#45-access-modifiers-public-private-protected-readonly)
+    - [`Resources`](#resources-5)
+    - [`Examples`](#examples-3)
+      - [`All Access Modifiers`](#all-access-modifiers)
 
 
 # Module04: Object-Oriented Programming in TypeScript
@@ -617,4 +621,57 @@ getAnimal(animal2); // I am Meawing
 
 **[🔼Back to Top](#table-of-contents)**
 
+
+## 4.5 Access Modifiers: Public, Private, Protected, Readonly
+
+### `Resources`
+
+- [05access-modifiers.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/src/05access-modifiers.ts) | [05access-modifiers.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/dist/05access-modifiers.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `All Access Modifiers`
+
+``` Typescript
+class BankAccount {
+    public readonly id: number;
+    public name: string;
+    private _balance: number; // Convention: use _ for private access modifier
+    protected bankName: string;
+
+    constructor(id: number, name: string, balance: number, bankName: string) {
+        this.id = id;
+        this.name = name;
+        this._balance = balance;
+        this.bankName = bankName;
+    }
+    getBalance() {
+        console.log(`My current balance is ${this._balance}tk`);
+    }
+    addDeposit(amount: number) {
+        this._balance = this._balance + amount;
+    }
+}
+
+class StudentAccount extends BankAccount {
+    test() {
+        // this.bankName // accessible (protected)
+        // this._balance // not accessible out of class (private)
+
+        /* 
+            # Normally, we should use private and readonly.
+            # public don't use, if we don't use parameter properties
+            # protected use only for special reason. It creates bug frequently
+        */
+    }
+}
+
+const myAccount1 = new BankAccount(123, 'Persian', 20000, "Pubali Bank");
+// myAccount1.balance = 0; // Property 'balance' is private and only accessible within class 'BankAccount'.
+console.log(myAccount1); // BankAccount { id: 123, name: 'Persian', _balance: 20000, bankName: 'Pubali Bank' }
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
