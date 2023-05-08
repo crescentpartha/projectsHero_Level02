@@ -27,6 +27,11 @@
     - [`Examples`](#examples)
       - [`Create class, object, method, constructor and parameter properties`](#create-class-object-method-constructor-and-parameter-properties)
       - [`Parameter Properties`](#parameter-properties)
+  - [4.3 Inheritance](#43-inheritance)
+    - [`Resources`](#resources-3)
+    - [`Examples`](#examples-1)
+      - [`Create normal Class & Methods`](#create-normal-class--methods)
+      - [`Inheritance`](#inheritance)
 
 
 # Module04: Object-Oriented Programming in TypeScript
@@ -291,6 +296,113 @@ cat.makeSound(); // The Persian says meaw meaw
 
 cat.name = "Special Cat"; // by-default every properties will be public. So, we can access it.
 cat.makeSound(); // The Special Cat says meaw meaw
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 4.3 Inheritance
+
+### `Resources`
+
+- [03inheritance.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/src/03inheritance.ts) | [03inheritance.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/dist/03inheritance.js)
+- [TypeScript Inheritance](https://www.javatpoint.com/typescript-inheritance)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Create normal Class & Methods`
+
+``` Typescript
+/* Create normal Class & Methods */
+
+class Student {
+    name: string;
+    age: number;
+    address: string;
+
+    constructor(name: string, age: number, address: string) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    }
+
+    makeSleep(hours: number): string {
+        return `This ${this.name} will sleep for ${hours}`;
+    }
+}
+
+class Teacher {
+    name: string;
+    age: number;
+    address: string;
+    designation: string; // different
+
+    constructor(name: string, age: number, address: string, designation: string) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.designation = designation;
+    }
+    
+    makeSleep(hours: number): string {
+        return `This ${this.name} will sleep for ${hours}`;
+    } 
+    takeClasses(numOfClass: number): string { // different
+        return `This ${this.name} will take ${numOfClass} class`;
+    }
+}
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Inheritance`
+
+``` Typescript
+/* Inheritance */
+
+class Parent {
+    name: string;
+    age: number;
+    address: string;
+
+    constructor(name: string, age: number, address: string) {
+        this.name = name;
+        this.age = age;
+        this.address = address;
+    }
+
+    makeSleep(hours: number): string {
+        return `This ${this.name} will sleep only for ${hours} hours`;
+    }
+}
+
+class Student extends Parent {
+    constructor(name: string, age: number, address: string) {
+        super(name, age, address);
+    }
+}
+const student1 = new Student("Mr. X", 25, "Sylhet");
+console.log(student1.name, student1.age, student1.address); // Mr. X 25 Sylhet
+console.log(student1.makeSleep(8)); // This Mr. X will sleep only for 8 hours
+
+
+class Teacher extends Parent {
+    designation: string;
+
+    constructor(name: string, age: number, address: string, designation: string) {
+        super(name, age, address);
+        this.designation = designation;
+    }
+
+    takeClasses(numOfClass: number): string {
+        return `This ${this.name} will take ${numOfClass} class`;
+    }
+}
+const teacher1 = new Teacher("Mr. X", 35, "Sylhet", "Lecturer");
+console.log(teacher1.name, teacher1.age, teacher1.address, teacher1.designation); // Mr. X 35 Sylhet Lecturer
+console.log(teacher1.makeSleep(8)); // This Mr. X will sleep only for 8 hours
+console.log(teacher1.takeClasses(4)); // This Mr. X will take 4 class
 ```
 
 **[🔼Back to Top](#table-of-contents)**
