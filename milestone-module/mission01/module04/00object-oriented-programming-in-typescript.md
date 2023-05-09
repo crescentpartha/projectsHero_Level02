@@ -69,6 +69,7 @@
     - [`Resources`](#resources-10)
     - [`Examples`](#examples-8)
       - [`Encapsulation-01`](#encapsulation-01)
+  - [Quiz 4](#quiz-4)
 
 
 # Module04: Object-Oriented Programming in TypeScript
@@ -1230,4 +1231,94 @@ console.log(myAccount3.balance); // 20050
 ```
 
 **[🔼Back to Top](#table-of-contents)**
+
+## Quiz 4
+
+01. __Which keyword is used in TypeScript to define a class that inherits from another class?__
+
+    - [ ] implements
+    - [x] __extends__
+    - [ ] inherits
+    - [ ] derives
+
+2.  __Fill in the blank with the appropriate statement.__
+
+    - [ ] this.num = num
+    - [ ] super = num
+    - [x] __super(num)__
+    - [ ] super(this.num)
+
+``` Typescript
+class A {
+  num: number;
+  constructor(num: number) {
+    this.num = num;
+  }
+}
+
+class B extends A {
+  constructor(num: number){
+    _______?______ ;
+  }
+}
+```
+
+3.  __Which type guard operator can be used to check if a property exists on an object?__
+
+    - [ ] keyof
+    - [x] __in__
+    - [ ] instanceof
+    - [ ] All of above
+
+4.  __What is the default access modifier for a class member in TypeScript?__
+
+    - [x] __public__
+    - [ ] private
+    - [ ] protected
+    - [ ] It is based on the enclosing scope of the member
+
+5.  __What is the syntax for declaring a getter method in TypeScript?__
+
+    - [x] __get methodName(): returnType { /* implementation */ }__
+    - [ ] methodName(): returnType { /* implementation */ }
+    - [ ] set methodName(): returnType { /* implementation */ }
+    - [ ] none
+
+6.  __Which access modifier allows a class member to be accessed from within the class only?__
+
+    - [ ] public
+    - [x] __private__
+    - [ ] protected
+    - [ ] all of above
+
+7.  __What is the syntax for declaring a class in TypeScript?__
+
+    - [ ] class ClassName() { /* implementation */ }
+    - [ ] ClassName() { /* implementation */ }
+    - [ ] function ClassName() { /* implementation */ }
+    - [x] __class ClassName { /* implementation */ }__
+
+8.  __What is the syntax for creating an instance of a class in TypeScript?__
+
+    - [ ] ClassName()
+    - [x] __new ClassName()__
+    - [ ] create ClassName()
+    - [ ] constructor(){}
+
+9.  __What is the purpose of using inheritance in OOP?__
+
+    - [ ] To create multiple instances of class.
+    - [x] __To reduce the amount of code needed to create similar classes.__
+    - [ ] To encapsulate data and behavior within a single entity.
+    - [ ] To find a sequence of instructions for a program.
+
+10.  __What is the purpose of using inheritance in OOP?__
+    
+     - [ ] The ability of a class to have multiple constructors.
+     - [ ] The ability of a class to implement multiple interfaces.
+     - [x] __The ability of a class to take on multiple forms or behaviors__
+     - [ ] The ability to create multiple instances of a class.
+
+**[🔼Back to Top](#table-of-contents)**
+
 
