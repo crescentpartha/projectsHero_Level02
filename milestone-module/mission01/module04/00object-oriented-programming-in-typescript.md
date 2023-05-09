@@ -47,6 +47,12 @@
     - [`Resources`](#resources-6)
     - [`Examples`](#examples-4)
       - [`Getter and Setter`](#getter-and-setter)
+  - [4.7 Static in Class](#47-static-in-class)
+    - [`Resources`](#resources-7)
+    - [`Examples`](#examples-5)
+      - [`Normal Class and Instance`](#normal-class-and-instance)
+      - [`Static in Class`](#static-in-class)
+      - [`Static in Class`](#static-in-class-1)
 
 
 # Module04: Object-Oriented Programming in TypeScript
@@ -129,12 +135,12 @@
 
 #### `Comparison JS vs TS`
 
-| JavaScript | TypeScript |
-| :---: | :---: |
-| Dynamically typed | Static typed |
-| Functional | Object-Oriented |
-| Interpreted | Compiled |
-| Limited Rich Tooling Support | Rich Tooling Support |
+|                        JavaScript                        |                 TypeScript                 |
+| :------------------------------------------------------: | :----------------------------------------: |
+|                    Dynamically typed                     |                Static typed                |
+|                        Functional                        |              Object-Oriented               |
+|                       Interpreted                        |                  Compiled                  |
+|               Limited Rich Tooling Support               |            Rich Tooling Support            |
 | Can be challenging to manage and maintain large codebase | Easy to manage and maintain large codebase |
 
 **[🔼Back to Top](#table-of-contents)**
@@ -746,6 +752,103 @@ console.log(myAccount2.balance); // 20020 (using getter)
 
 myAccount2.deposit = 50;
 console.log(myAccount2.balance); // 20050
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 4.7 Static in Class
+
+### `Resources`
+
+- [07static-in-class.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/src/07static-in-class.ts) | [07static-in-class.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/dist/07static-in-class.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Normal Class and Instance`
+
+``` Typescript
+/* Normal Class and Instance */
+
+class Counter {
+    counter: number;
+
+    // if any class receive parameter, we take help of constructor
+    constructor(counter: number) {
+        this.counter = counter;
+    }
+
+    increment(): number {
+        return this.counter = this.counter + 1;
+    }
+    decrement(): number {
+        return this.counter = this.counter - 1;
+    }
+}
+
+const instance1 = new Counter(0);
+const instance2 = new Counter(1);
+console.log(instance1.increment()); // 1
+console.log(instance2.increment()); // 2
+
+/* Two different instance create different memory and store value accordingly */
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Static in Class`
+
+``` Typescript
+/* Static in Class */
+
+class Counter {
+    static counter: number = 0;
+
+    /* 
+        # when we use static keyword, we can't use constructor and take other arguments
+        # static property creates only one memory and store/modify value in the same memory
+    */
+
+    increment(): number {
+        return Counter.counter = Counter.counter + 1;
+    }
+    decrement(): number {
+        return Counter.counter = Counter.counter - 1;
+    }
+}
+
+const instance1 = new Counter();
+const instance2 = new Counter();
+console.log(instance1.increment()); // 0 --> 1
+console.log(instance2.increment()); // 1 --> 2
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Static in Class`
+
+``` Typescript
+/* Static in Class */
+
+class Counter {
+    static counter: number = 0;
+
+    static increment(): number {
+        return Counter.counter = Counter.counter + 1;
+    }
+    static decrement(): number {
+        return Counter.counter = Counter.counter - 1;
+    }
+}
+
+// const instance1 = new Counter();
+// const instance2 = new Counter();
+// console.log(instance1.increment()); // Property 'increment' does not exist on type 'Counter'
+console.log(Counter.increment()); // 0 --> 1 | access the static member 'Counter.increment' instead
+console.log(Counter.increment()); // 1 --> 2
+
+/* In Static class, every static properties and methods is accessible by Class name */
 ```
 
 **[🔼Back to Top](#table-of-contents)**
