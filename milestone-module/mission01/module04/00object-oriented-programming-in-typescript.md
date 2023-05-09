@@ -58,6 +58,12 @@
     - [`Examples`](#examples-6)
       - [`Polymorphism-01`](#polymorphism-01)
       - [`Polymorphism-02`](#polymorphism-02)
+  - [4.9 Abstraction](#49-abstraction)
+    - [`Resources`](#resources-9)
+    - [`Examples`](#examples-7)
+      - [`Abstraction Theory`](#abstraction-theory)
+      - [`Abstraction using interface`](#abstraction-using-interface)
+      - [`Abstraction using abstract class`](#abstraction-using-abstract-class)
 
 
 # Module04: Object-Oriented Programming in TypeScript
@@ -958,6 +964,134 @@ function getAreaOfShape(param: Shape) {
 
 getAreaOfShape(new Circle(10)); // 314.1592653589793
 getAreaOfShape(new Rectangle(10, 12)); // 120
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 4.9 Abstraction
+
+### `Resources`
+
+- [09abstraction.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/src/09abstraction.ts) | [09abstraction.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/dist/09abstraction.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Abstraction Theory`
+
+``` Typescript
+/* Abstraction Theory */
+
+/* 
+    - Abstraction: We don't know the real implementation of a method in class but we can infer the shape of it
+    - Abstraction is a method of modelling objects in a system that separates the responsibilities of the class or type from the code that inherits it
+    - Two way of implement Abstraction: using interface & using abstract class
+*/
+
+// interface
+
+// create interface for object | (we can also create interface for class)
+interface IVehicle {
+    name: string;
+    model: string;
+}
+
+// object
+const vehicle: IVehicle = {
+    name: "Car",
+    model: "2000"
+}
+
+// abstract class
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Abstraction using interface`
+
+``` Typescript
+/* abstraction using interface */
+
+interface IVehicle {
+    startEngine(): void;
+    stopEngine(): void;
+    move(): void;
+}
+
+class Vehicle implements IVehicle {
+    // using parameter properties
+    constructor(
+        public name: string,
+        public brand: string,
+        public model: number,
+    ){
+
+    }
+    startEngine(): void {
+        console.log(`I am starting Engine`);
+    }
+    stopEngine(): void {
+        console.log(`I am stopping Engine`);
+    }
+    move(): void {
+        console.log(`I am moving the car`);
+    }
+    test() {
+        console.log(`I am for testing purpose`);
+    }
+}
+
+const vehicle1 = new Vehicle('Car', 'Toyota', 2000);
+console.log(vehicle1); // Vehicle { name: 'Car', brand: 'Toyota', model: 2000 }
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Abstraction using abstract class`
+
+``` Typescript
+// abstraction using abstract class
+
+abstract class Vehicle {
+    // using parameter properties
+    constructor(
+        public name: string,
+        public brand: string,
+        public model: number,
+    ) { }
+    abstract startEngine(): void;
+    abstract stopEngine(): void;
+    move(): void {
+        console.log(`I am moving the car`);
+    }
+}
+
+class Car extends Vehicle {
+    // test(): void {
+    //     this. // access properties and methods
+    // }
+
+    startEngine(): void {
+        console.log(`I am starting Engine`);
+    }
+    stopEngine(): void {
+        console.log(`I am stopping Engine`);
+    }
+}
+
+// const car1 = new Vehicle('Car', 'Honda', 2015); // Cannot create an instance of an abstract class
+// car1. // access properties and methods
+
+/* 
+    Summary of Abstraction:
+
+    - Abstraction: We don't know the real implementation of a method in class but we can infer the shape of it
+    - Two way of Abstraction: using interface & using abstract class
+    - Create child class by following abstract class
+    - Can't create instance of abstract class 
+    - Can extends abstract class
+*/
 ```
 
 **[🔼Back to Top](#table-of-contents)**
