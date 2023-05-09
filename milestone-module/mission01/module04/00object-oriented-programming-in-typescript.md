@@ -51,8 +51,13 @@
     - [`Resources`](#resources-7)
     - [`Examples`](#examples-5)
       - [`Normal Class and Instance`](#normal-class-and-instance)
-      - [`Static in Class`](#static-in-class)
-      - [`Static in Class`](#static-in-class-1)
+      - [`Static in Class 01`](#static-in-class-01)
+      - [`Static in Class 02`](#static-in-class-02)
+  - [4.8 Polymorphism](#48-polymorphism)
+    - [`Resources`](#resources-8)
+    - [`Examples`](#examples-6)
+      - [`Polymorphism-01`](#polymorphism-01)
+      - [`Polymorphism-02`](#polymorphism-02)
 
 
 # Module04: Object-Oriented Programming in TypeScript
@@ -797,7 +802,7 @@ console.log(instance2.increment()); // 2
 
 **[🔼Back to Top](#table-of-contents)**
 
-#### `Static in Class`
+#### `Static in Class 01`
 
 ``` Typescript
 /* Static in Class */
@@ -826,7 +831,7 @@ console.log(instance2.increment()); // 1 --> 2
 
 **[🔼Back to Top](#table-of-contents)**
 
-#### `Static in Class`
+#### `Static in Class 02`
 
 ``` Typescript
 /* Static in Class */
@@ -853,4 +858,107 @@ console.log(Counter.increment()); // 1 --> 2
 
 **[🔼Back to Top](#table-of-contents)**
 
+## 4.8 Polymorphism
+
+### `Resources`
+
+- [08polymorphism.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/src/08polymorphism.ts) | [08polymorphism.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module04/dist/08polymorphism.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Examples`
+
+#### `Polymorphism-01`
+
+``` Typescript
+/* Polymorphism */
+
+/* 
+    - Poly --> many & morphism --> form
+    - Polymorphism is the ability to create a class that has more than one form. 
+    - In other words, classes have the same methods but different implementations.
+*/
+
+class Person {
+    takeNap(): void {
+        console.log(`I am sleeping 8 hours per day`);
+    }
+}
+
+class Student1 extends Person {
+    // test() {
+    //     this.
+    // }
+    takeNap(): void {
+        console.log(`I am sleeping 10 hours per day`);
+    }
+}
+
+class Developer extends Person {
+    takeNap(): void {
+        console.log(`I am sleeping 5 hours per day`);
+    }
+}
+
+function getNap(param: Person) {
+    param.takeNap();
+}
+
+const person1 = new Person();
+const person2 = new Student1();
+const person3 = new Developer();
+getNap(person1); // I am sleeping 8 hours per day
+getNap(person2); // I am sleeping 10 hours per day
+getNap(person3); // I am sleeping 5 hours per day
+
+// method same but give different output (many form --> polymorphism)
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Polymorphism-02`
+
+``` Typescript
+/* Polymorphism */
+
+class Shape {
+    getArea(): number {
+        return 0;
+    }
+}
+
+// area --> pi * r * r
+class Circle extends Shape {
+    radius: number;
+    constructor(radius: number) {
+        super();
+        this.radius = radius;
+    }
+    getArea(): number {
+        return Math.PI * this.radius * this.radius;
+    }
+}
+
+class Rectangle extends Shape {
+    height: number;
+    width: number;
+    constructor(height: number, width: number) {
+        super();
+        this.height = height;
+        this.width = width;
+    }
+    getArea(): number {
+        return this.height * this.width;
+    }
+}
+
+function getAreaOfShape(param: Shape) {
+    console.log(param.getArea());
+}
+
+getAreaOfShape(new Circle(10)); // 314.1592653589793
+getAreaOfShape(new Rectangle(10, 12)); // 120
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
