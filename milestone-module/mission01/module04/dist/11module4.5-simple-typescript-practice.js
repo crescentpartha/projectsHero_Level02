@@ -116,3 +116,36 @@ const result6 = emailMatcher(Person2, 'abc.partha@gmail.com');
 // output
 console.log(result5); // null
 console.log(result6); // [ { name: 'Partha', age: 25, email: 'abc.partha@gmail.com' } ]
+/*
+    07. Create a TypeScript program that declares an array of numbers.
+    Use the spread  operator to pass the elements of the array as arguments to a function that finds the minimum and maximum values of the array.
+    Use destructuring to assign the minimum and maximum values to separate variables, and log them to the console.
+*/
+/* Finds the minimum and maximum values of the array */
+// arrow function
+const minMax = (...numbers) => {
+    console.log(numbers);
+    let min = Math.min(...numbers);
+    let max = Math.max(...numbers);
+    return [min, max];
+};
+// array of numbers
+const numbers2 = [8, 3, 5, 1, 2, -10, 4, 6, 7, 8, 9];
+// invoke function
+const result7 = minMax(...numbers2);
+// array destructuring
+const [min, max] = result7;
+// output
+console.log(min, max); // -10 9
+// arrow function with optional parameter
+const upperAndLowerCase = (color, bool) => {
+    if (bool)
+        return color.toUpperCase();
+    else
+        return color.toLowerCase();
+};
+// invoke function and output
+console.log(upperAndLowerCase("red", true)); // RED
+console.log(upperAndLowerCase("green")); // green
+console.log(upperAndLowerCase("green", true)); // GREEN
+console.log(upperAndLowerCase("blue", false)); // blue

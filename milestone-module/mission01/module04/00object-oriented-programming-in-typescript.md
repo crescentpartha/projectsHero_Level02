@@ -1533,7 +1533,28 @@ console.log(result6); // [ { name: 'Partha', age: 25, email: 'abc.partha@gmail.c
 7.  Create a TypeScript program that declares an array of numbers. Use the spread  operator to pass the elements of the array as arguments to a function that finds the minimum and maximum values of the array. Use destructuring to assign the minimum and maximum values to separate variables, and log them to the console.
 
 ``` Typescript
+/* Finds the minimum and maximum values of the array */
 
+// arrow function
+const minMax = (...numbers: number[]): number[] => {
+    console.log(numbers);
+    let min: number = Math.min(...numbers);
+    let max: number = Math.max(...numbers);
+
+    return [min, max];
+}
+
+// array of numbers
+const numbers2: number[] = [8, 3, 5, 1, 2, -10, 4, 6, 7, 8, 9];
+
+// invoke function
+const result7: number[] = minMax(...numbers2);
+
+// array destructuring
+const [min, max] = result7;
+
+// output
+console.log(min, max); // -10 9
 ```
 
 **[🔼Back to Top](#table-of-contents)**
@@ -1541,7 +1562,23 @@ console.log(result6); // [ { name: 'Partha', age: 25, email: 'abc.partha@gmail.c
 8.  Create a TypeScript program that declares a function that takes a string parameter with a literal type of "red", "green", or "blue", and an optional boolean parameter. If the boolean parameter is true, log the string parameter in uppercase. If the boolean parameter is false or not provided, log the string parameter in lowercase.
 
 ``` Typescript
+/* Returns conditional uppercase or lowercase */
 
+// type alias
+type colorType = "red" | "green" | "blue"; // literal type
+type booleanType = boolean | null; 
+
+// arrow function with optional parameter
+const upperAndLowerCase = (color: colorType, bool?: booleanType): string => {
+    if (bool) return color.toUpperCase();
+    else return color.toLowerCase();
+}
+
+// invoke function and output
+console.log(upperAndLowerCase("red", true)); // RED
+console.log(upperAndLowerCase("green" )); // green
+console.log(upperAndLowerCase("green", true )); // GREEN
+console.log(upperAndLowerCase("blue", false)); // blue
 ```
 
 **[🔼Back to Top](#table-of-contents)**
