@@ -9,11 +9,26 @@
     If any file don't contain same named variable or function, then we don't need to use Alias. We can use it as usual.
 */
 
-export const add = (param1: number, param2: number): number => {
+const add = (param1: number, param2: number): number => {
     return param1 + param2;
 }
 
-export const subtract = (param1: number, param2: number): number => {
+const subtract = (param1: number, param2: number): number => {
     return param1 - param2;
 }
+
+const multiply = (param1: number, param2: number): number => {
+    return param1 * param2;
+}
+
+const average = (param1: number, param2: number): number => {
+    return (param1 + param2) / 2;
+}
+
+export default {
+    add,
+    subtract,
+    multiply,
+    average,
+};
 

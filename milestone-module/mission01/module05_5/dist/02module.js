@@ -7,9 +7,21 @@
     But we need to use Alias for two same variable or function and gave a different name to avoid naming conflict on same file.
     If any file don't contain same named variable or function, then we don't need to use Alias. We can use it as usual.
 */
-export const add = (param1, param2) => {
+const add = (param1, param2) => {
     return param1 + param2;
 };
-export const subtract = (param1, param2) => {
+const subtract = (param1, param2) => {
     return param1 - param2;
+};
+const multiply = (param1, param2) => {
+    return param1 * param2;
+};
+const average = (param1, param2) => {
+    return (param1 + param2) / 2;
+};
+export default {
+    add,
+    subtract,
+    multiply,
+    average,
 };

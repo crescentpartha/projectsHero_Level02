@@ -8,6 +8,15 @@
       - [`CommonJS format`](#commonjs-format)
       - [`ES6 format OR Asynchronous Module Definition (AMD) format`](#es6-format-or-asynchronous-module-definition-amd-format)
     - [`Summary`](#summary)
+  - [5.5.2 Different types of import and export statement](#552-different-types-of-import-and-export-statement)
+    - [`Resources`](#resources-1)
+    - [`Different types of import and export statement`](#different-types-of-import-and-export-statement)
+      - [`Common way of import & export`](#common-way-of-import--export)
+      - [`WildCard import`](#wildcard-import)
+      - [`default export`](#default-export)
+      - [`Common name of default export & default export by object`](#common-name-of-default-export--default-export-by-object)
+      - [`export from utils folder & SyntaxError (import from outside a module)`](#export-from-utils-folder--syntaxerror-import-from-outside-a-module)
+      - [`export from utils folder & SyntaxError (import from outside a module) & Reduce lines of Code`](#export-from-utils-folder--syntaxerror-import-from-outside-a-module--reduce-lines-of-code)
 
 # Module5.5: Bonus Module
 
@@ -16,6 +25,8 @@
 ### `Resources`
 
 - [Modularization in Typescript](https://keyholesoftware.com/2013/01/14/modularization-in-typescript/)
+- `In src folder:` [01main.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/01main.ts) | [02module.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/02module.ts)
+- `In dist folder:` [01main.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/01main.js) | [02module.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/02module.js)
 
 **[🔼Back to Top](#table-of-contents)**
 
@@ -224,6 +235,360 @@ exports.add = add; // declare `add property` in `exports object` and then add `a
 ```
 
 > `Ctrl + spacebar` = ___To show module list___ | ___To change module format___ <br /> Change module --> "module": "___commonjs___", to "module": "___ES2015___", <br /> <br /> Once upon a time, people were using `CommonJS`. Nowadays, people are using `ES2015` <br /> Because of using ___Typescript___, We can fill the syntax of ___import___ and ___export___. <br /><br /> So, because of changing `moduler format`, we can ___organize our code___. ___create own scope___ to avoid ___naming conflict___.
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 5.5.2 Different types of import and export statement
+
+### `Resources`
+
+- `In src folder:` [01main.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/01main.ts) | [02module.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/02module.ts) | [03index.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/03index.ts)
+- `In dist folder:` [01main.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/01main.js) | [02module.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/02module.js) | [03index.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/03index.js)
+- `In src/utils folder:` [add.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/utils/add.ts) | [subtract.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/utils/subtract.ts) | [multiply.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/utils/multiply.ts) | [average.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/utils/average.ts) | [index.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/utils/index.ts)
+- `In dist/utils folder:` [add.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/utils/add.js) | [subtract.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/utils/subtract.js) | [multiply.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/utils/multiply.js) | [average.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/utils/average.js) | [index.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/utils/index.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Different types of import and export statement`
+
+#### `Common way of import & export`
+
+``` Typescript
+// In 02module.ts
+
+/* way-01 | Common way of export */
+
+export const add = (param1: number, param2: number): number => {
+    return param1 + param2;
+}
+
+export const subtract = (param1: number, param2: number): number => {
+    return param1 - param2;
+}
+
+export const multiply = (param1: number, param2: number): number => {
+    return param1 * param2;
+}
+```
+
+``` Typescript
+// In 01main.ts
+
+/* way-01 | Common way of import */
+
+import { add as addToo, subtract, multiply } from './02module'; // Common way of import
+
+const add = (param1: number, param2: number, param3: number): number => {
+    return param1 + param2 + param3;
+}
+
+const res = addToo(4, 6);
+console.log(res); // 10
+
+const res2 = subtract(4, 6);
+console.log(res2); // -2
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `WildCard import`
+
+``` Typescript
+// In 02module.ts
+
+/* way-01 | Common way of export */
+
+export const add = (param1: number, param2: number): number => {
+    return param1 + param2;
+}
+
+export const subtract = (param1: number, param2: number): number => {
+    return param1 - param2;
+}
+
+export const multiply = (param1: number, param2: number): number => {
+    return param1 * param2;
+}
+```
+
+``` Typescript
+// In 01main.ts
+
+/* way-02 | WildCard import */
+
+import * as Methods from './02module'; // WildCard Import
+
+const add = (param1: number, param2: number, param3: number): number => {
+    return param1 + param2 + param3;
+}
+
+const res = Methods.add(4, 6);
+console.log(res); // 10
+
+const res2 = Methods.subtract(4, 6);
+console.log(res2); // -2
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `default export`
+
+``` Typescript
+// In 02module.ts
+
+/* way-03 | default export */
+
+export const add = (param1: number, param2: number): number => {
+    return param1 + param2;
+}
+
+export const subtract = (param1: number, param2: number): number => {
+    return param1 - param2;
+}
+
+const average = (param1: number, param2: number): number => {
+    return (param1 + param2) / 2;
+}
+
+export default average; // default export
+```
+
+``` Typescript
+// In 01main.ts
+
+/* way-03 | default import & normal import */
+
+// import React, { useState, useEffect } from 'react'; // default import & normal import
+import average, { add as addToo, subtract } from "./02module";
+
+const add = (param1: number, param2: number, param3: number): number => {
+    return param1 + param2 + param3;
+}
+
+const res = addToo(4, 6);
+console.log(res); // 10
+
+const res2 = subtract(4, 6);
+console.log(res2); // -2
+
+const res3 = average(4, 6);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Common name of default export & default export by object`
+
+``` Typescript
+// In 02module.ts
+
+/* way-04 | default export by object */
+
+const add = (param1: number, param2: number): number => {
+    return param1 + param2;
+}
+
+const subtract = (param1: number, param2: number): number => {
+    return param1 - param2;
+}
+
+const multiply = (param1: number, param2: number): number => {
+    return param1 * param2;
+}
+
+const average = (param1: number, param2: number): number => {
+    return (param1 + param2) / 2;
+}
+
+// default export by object
+export default {
+    add,
+    subtract,
+    multiply,
+    average,
+};
+```
+
+``` Typescript
+// In 01main.ts
+
+/* way-04 | Common name of default import */
+
+import Jekonu from './02module'; // common name of default export
+
+const add = (param1: number, param2: number, param3: number): number => {
+    return param1 + param2 + param3;
+}
+
+const res = Jekonu.add(4, 6);
+console.log(res); // 10
+
+const res2 = Jekonu.subtract(4, 6);
+console.log(res2); // -2
+
+const res3 = Jekonu.average(4, 6);
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `export from utils folder & SyntaxError (import from outside a module)`
+
+``` Typescript
+// In src/utils/add.ts
+
+const add = (param1: number, param2: number): number => {
+    return param1 + param2;
+}
+
+export default add;
+```
+
+``` Typescript
+// In src/utils/subtract.ts
+
+const subtract = (param1: number, param2: number): number => {
+    return param1 - param2;
+}
+
+export default subtract;
+```
+
+``` Typescript
+// In src/utils/multiply.ts
+
+const multiply = (param1: number, param2: number): number => {
+    return param1 * param2;
+}
+
+export default multiply;
+```
+
+``` Typescript
+// In src/utils/average.ts
+
+const average = (param1: number, param2: number): number => {
+    return (param1 + param2) / 2;
+}
+
+export default average;
+```
+
+---
+
+``` Typescript
+// In src/03index.ts
+
+/* way-05 | export from utils folder */
+
+import addTwo from './utils/add';
+import subtract from './utils/subtract';
+import multiply from './utils/add';
+import average from './utils/average';
+
+const add = (param1: number, param2: number, param3: number): number => {
+    return param1 + param2 + param3;
+}
+
+const res1 = addTwo(4, 6); // 10
+const res2 = subtract(4, 6); // -2
+const res3 = multiply(4, 6); // 24
+const res4 = average(4, 6); // 5
+console.log(res1, res2, res3, res4); // SyntaxError: Cannot use import statement outside a module
+```
+
+> `Notes:` We got `SyntaxError: Cannot use import statement outside a module` error because ___utils___ is a child folder of ___src___. <br /> So, `src/03index.ts` use import statement from outside a module. <br /> ___utils files create a scope on utils folder___.
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `export from utils folder & SyntaxError (import from outside a module) & Reduce lines of Code`
+
+``` Typescript
+// In src/utils/index.ts
+
+import addTwo from './add';
+import subtract from './subtract';
+import multiply from './multiply';
+import average from './average';
+
+/* 
+    - This file used to default export all utils such as add, subtract, multiply, and average.
+    - So that we can reduce lines of Code
+*/
+
+export default {
+    addTwo,
+    subtract,
+    multiply,
+    average,
+};
+```
+
+``` Typescript
+// In src/utils/add.ts
+
+const add = (param1: number, param2: number): number => {
+    return param1 + param2;
+}
+
+export default add;
+```
+
+``` Typescript
+// In src/utils/subtract.ts
+
+const subtract = (param1: number, param2: number): number => {
+    return param1 - param2;
+}
+
+export default subtract;
+```
+
+``` Typescript
+// In src/utils/multiply.ts
+
+const multiply = (param1: number, param2: number): number => {
+    return param1 * param2;
+}
+
+export default multiply;
+```
+
+``` Typescript
+// In src/utils/average.ts
+
+const average = (param1: number, param2: number): number => {
+    return (param1 + param2) / 2;
+}
+
+export default average;
+```
+
+---
+
+``` Typescript
+// In src/03index.ts
+
+/* way-05 | export from utils folder */
+
+// import addTwo from './utils/add';
+// import subtract from './utils/subtract';
+// import multiply from './utils/add';
+// import average from './utils/average';
+
+// Reduce lines of Code
+import methods from './utils/index';
+
+const add = (param1: number, param2: number, param3: number): number => {
+    return param1 + param2 + param3;
+}
+
+const res1 = methods.addTwo(4, 6); // 10
+const res2 = methods.subtract(4, 6); // -2
+const res3 = methods.multiply(4, 6); // 24
+const res4 = methods.average(4, 6); // 5
+console.log(res1, res2, res3, res4); // SyntaxError: Cannot use import statement outside a module
+```
+
+> `Notes:` We got `SyntaxError: Cannot use import statement outside a module` error because ___utils___ is a child folder of ___src___. <br /> So, `src/03index.ts` use import statement from outside a module. <br /> ___utils files create a scope on utils folder___.
 
 **[🔼Back to Top](#table-of-contents)**
 
