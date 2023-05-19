@@ -26,6 +26,9 @@
       - [`Required<Type>`](#requiredtype)
       - [`Readonly<Type>`](#readonlytype)
       - [`Record<Keys, Type> & index signature`](#recordkeys-type--index-signature)
+  - [5.5.4: How to use multiple interface as a type and create a model for a class](#554-how-to-use-multiple-interface-as-a-type-and-create-a-model-for-a-class)
+    - [`Resources`](#resources-3)
+    - [`Example`](#example)
 
 # Module5.5: Bonus Module
 
@@ -608,12 +611,14 @@ console.log(res1, res2, res3, res4); // SyntaxError: Cannot use import statement
 - [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
 - [Index Signatures in TypeScript](https://dmitripavlutin.com/typescript-index-signatures/) 
 - [Index Signatures](https://basarat.gitbook.io/typescript/type-system/index-signatures)
+- `In src folder:` [04utility-types.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/04utility-types.ts)
+- `In dist folder:` [04utility-types.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/04utility-types.js)
 
 **[🔼Back to Top](#table-of-contents)**
 
 ### `Utility Types`
 
-> TypeScript provides several utility types to facilitate common type transformations. These utilities are available globally.
+> TypeScript provides ___several utility types___ to ___facilitate common type transformations___. These utilities are ___available globally___.
 
 #### `Pick<Type, Keys>`
 
@@ -766,4 +771,66 @@ const obj: myObj = {
 
 **[🔼Back to Top](#table-of-contents)**
 
+## 5.5.4: How to use multiple interface as a type and create a model for a class
+
+### `Resources`
+
+- [How do I implement multiple interfaces in a class?](https://stackoverflow.com/questions/46075181/how-do-i-implement-multiple-interfaces-in-a-class)
+- `In src folder:` [05multiple_interface-&-model_for_a_class.ts](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/src/05multiple_interface-&-model_for_a_class.ts)
+- `In dist folder:` [05multiple_interface-&-model_for_a_class.js](https://github.com/crescentpartha/projectsHero_Level02/blob/main/milestone-module/mission01/module05_5/dist/05multiple_interface-&-model_for_a_class.js)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Example`
+
+``` Typescript
+/* 
+    class (has)
+        1. props   --> (create) interface
+        2. methods --> (create) interface
+        interface + interface = model // combine both interface and create a type called model
+    class will use this model using "class X implements typeName"
+*/
+
+// create generic model
+interface Model<TData, TMethods> {
+    data: TData;
+    methods: TMethods;
+};
+
+// Properties interface
+interface IUser {
+    firstName: string;
+    lastName: string;
+};
+// Methods interface
+interface IMethods {
+    fullName(): string;
+}
+
+// create type from model
+type model = Model<IUser, IMethods>;
+
+// class implements this type
+class User implements model {
+    data: IUser;
+    methods: IMethods;
+
+    constructor(firstName: string, lastName: string) {
+        this.data = { firstName, lastName };
+        this.methods = {
+            fullName: () => `${firstName} ${lastName}`,
+        }
+    }
+}
+
+// create an instance (object)
+const user1 = new User('Crescent', 'Partha');
+
+console.log(user1.methods.fullName()); // Crescent Partha
+console.log(user1.data.firstName); // Crescent
+console.log(user1.data.lastName); // Partha
+```
+
+**[🔼Back to Top](#table-of-contents)**
 
