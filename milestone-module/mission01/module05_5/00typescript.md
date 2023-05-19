@@ -17,6 +17,15 @@
       - [`Common name of default export & default export by object`](#common-name-of-default-export--default-export-by-object)
       - [`export from utils folder & SyntaxError (import from outside a module)`](#export-from-utils-folder--syntaxerror-import-from-outside-a-module)
       - [`export from utils folder & SyntaxError (import from outside a module) & Reduce lines of Code`](#export-from-utils-folder--syntaxerror-import-from-outside-a-module--reduce-lines-of-code)
+  - [5.5.3 Know about utility Types](#553-know-about-utility-types)
+    - [`Resources`](#resources-2)
+    - [`Utility Types`](#utility-types)
+      - [`Pick<Type, Keys>`](#picktype-keys)
+      - [`Omit<Type, Keys>`](#omittype-keys)
+      - [`Partial<Type>`](#partialtype)
+      - [`Required<Type>`](#requiredtype)
+      - [`Readonly<Type>`](#readonlytype)
+      - [`Record<Keys, Type> & index signature`](#recordkeys-type--index-signature)
 
 # Module5.5: Bonus Module
 
@@ -589,6 +598,171 @@ console.log(res1, res2, res3, res4); // SyntaxError: Cannot use import statement
 ```
 
 > `Notes:` We got `SyntaxError: Cannot use import statement outside a module` error because ___utils___ is a child folder of ___src___. <br /> So, `src/03index.ts` use import statement from outside a module. <br /> ___utils files create a scope on utils folder___.
+
+**[🔼Back to Top](#table-of-contents)**
+
+## 5.5.3 Know about utility Types
+
+### `Resources`
+
+- [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+- [Index Signatures in TypeScript](https://dmitripavlutin.com/typescript-index-signatures/) 
+- [Index Signatures](https://basarat.gitbook.io/typescript/type-system/index-signatures)
+
+**[🔼Back to Top](#table-of-contents)**
+
+### `Utility Types`
+
+> TypeScript provides several utility types to facilitate common type transformations. These utilities are available globally.
+
+#### `Pick<Type, Keys>`
+
+``` Typescript
+// 01. Pick<Type, Keys>
+
+interface Person {
+    name: string;
+    email?: string;
+    contactNo: string;
+};
+
+/* 
+    - Constructs a type by picking the set of properties Keys (string literal or union of string literals) from Type. 
+    - To select property
+*/
+type Email = Pick<Person, "email">;
+type ContactNo = Pick<Person, "contactNo">;
+type Contact = Pick<Person, "contactNo" | "email">;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Omit<Type, Keys>`
+
+``` Typescript
+// 02. Omit<Type, Keys>
+
+/* 
+    - Constructs a type by picking all properties from Type and then removing Keys (string literal or union of string literals). 
+    - The opposite of Pick.
+    - To remove property
+*/
+
+interface Person {
+    name: string;
+    email?: string;
+    contactNo: string;
+};
+
+type Name = Omit<Person, "email" | "contactNo">;
+type ContactNo2 = Omit<Person, "name">;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Partial<Type>`
+
+``` Typescript
+// 03. Partial<Type>
+
+/* 
+    - Constructs a type with all properties of Type set to optional. 
+    - This utility will return a type that represents all subsets of a given type.
+    - To make all the properties be optional type
+*/
+
+interface Person {
+    name: string;
+    email?: string;
+    contactNo: string;
+};
+
+type Optional = Partial<Person>;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Required<Type>`
+
+``` Typescript
+// 04. Required<Type>
+
+/* 
+    - Constructs a type consisting of all properties of Type set to required. 
+    - The opposite of Partial.
+*/
+
+interface Person {
+    name: string;
+    email?: string;
+    contactNo: string;
+};
+
+type RequiredProps = Required<Person>;
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Readonly<Type>`
+
+``` Typescript
+// 05. Readonly<Type>
+
+/* 
+    - Constructs a type with all properties of Type set to readonly, meaning the properties of the constructed type cannot be reassigned.
+*/
+
+interface Person {
+    name: string;
+    email?: string;
+    contactNo: string;
+};
+
+const person: Readonly<Person> = {
+    name: "Persian",
+    email: "abc@gmail.com",
+    contactNo: '12341234'
+};
+
+// person.name = 'Partha'; // Cannot assign to 'name' because it is a read-only property
+```
+
+**[🔼Back to Top](#table-of-contents)**
+
+#### `Record<Keys, Type> & index signature`
+
+``` Typescript
+// 06. Record<Keys, Type>
+
+/* 
+    - Constructs an object type whose property keys are Keys and whose property values are Type. 
+    - This utility can be used to map the properties of a type to another type.
+*/
+
+// type myObj = {
+//     a: string;
+//     b: string;
+//     c: string;
+// };
+
+// using index signature
+// type myObj = {
+//     // [key: string]: string;
+//     [key: 'a' | 'b' | 'c']: string;
+// };
+
+// using Record Utility - 'a' | 'b' | 'c'
+// type myObj = Record<string, string>;
+type myObj = Record<'a' | 'b' | 'c', string>;
+
+const obj: myObj = {
+    a: "1",
+    b: "2",
+    c: "3",
+    // d: 4     /* Type 'number' is not assignable to type 'string' */
+    // d: "4"   /* 'd' does not exist in type 'myObj' */
+};
+```
 
 **[🔼Back to Top](#table-of-contents)**
 
